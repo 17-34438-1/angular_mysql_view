@@ -1,0 +1,77 @@
+<div class="wrapper">
+    <app-navbar></app-navbar>
+    <app-sidebar></app-sidebar>
+    <!-- Labor Category Form Starts -->
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                     
+                    </div>
+                    <div class="col-sm-6">
+                       
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        
+        <section class="content">
+            <div class="container">
+                <div class="row">
+                  
+                    <div class="col-md-9 offset-md-1">
+                        <p *ngIf="phoneNumberStatus"   class="h5 mb-4" align="center"><font color="#cc0000">
+                            Your Contact Number Has Not Found,Please Contact With CTMS Customer Care.
+                        </font></p>
+                        <div class="card">
+                           
+                            <div *ngIf="otpStatus" class="card-body" >
+                                <p class="h4 mb-4" align="center">Verification</p>
+                                <div *ngIf="verifyStatus">
+                                    <p  class="h5 mb-4" align="center"><font color="#cc0000">Wrong OTP</font></p>
+                                </div>
+                                           
+                                <form [formGroup]="verifyOtpForm" (ngSubmit)="onSubmit($any($event.target))">
+                                  
+                                    
+                                    <div class="row">
+                                        <div class="col-md-8 offset-md-2">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                  
+                                                    <button type="button" class="btn btn-primary">Verify Code:</button>
+                                                </div>
+                                               
+                                                <input type="text" name="otpCode" class="form-control"/>
+                                               
+                                               
+                                            </div> 
+                                                                                   
+                                        </div>
+                                    </div>
+                                   
+                                    
+                                    <div class="row">
+                                        <div class="col-md-8 offset-md-2 text-center">
+                                            <button [disabled]="this.verifyOtpForm.invalid"  class="btn btn-primary">Next</button>
+                                        </div>
+                                    </div>
+                                </form>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+             </div>
+        </section>
+    </div>
+   <app-footer></app-footer>
+</div>
+
+
+
+
+

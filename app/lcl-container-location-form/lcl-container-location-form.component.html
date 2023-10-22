@@ -1,0 +1,238 @@
+<div class="wrapper">
+    <app-navbar></app-navbar>
+    <app-sidebar></app-sidebar>
+    <!-- Designation Category Form Starts -->
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <!-- <h1>Labor Category</h1> -->
+                    </div>
+                    <div class="col-sm-6">
+                        <!-- <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Labor Category</a></li>
+                            <li class="breadcrumb-item active">Add</li>
+                        </ol> -->
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <section class="content">
+            <div class="container">
+                <div class="row">
+                    <!-- <div class="col-md-12"> -->
+                    <div class="col-md-9 offset-md-1">
+                        <div class="card">
+                            <!-- <div class="card-header">
+                                <h3 class="card-title">Add New Labor Category</h3>                                
+                            </div> -->
+                            <div class="card-body">
+                                <p class="h4 mb-4" align="center">Search Container Location</p>
+                                <form [formGroup]="lclContainerLocationSearchForm" (ngSubmit)="onSubmit()">
+                                    <!-- <div class="row">
+                                        <div class="col-md-6 offset-md-2">
+                                            <h4 align="center"><b>Add New Labor Category</b></h4>
+                                        </div>                                        
+                                    </div>   -->
+                                    <div class="row">
+                                        <div class="col-md-6 offset-md-3">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <button type="button" class="btn btn-primary"
+                                                        style="width: 85px;">Rotation</button>
+                                                </div>
+                                                <input type="text" formControlName="rotation" name="rotation"
+                                                    id="rotation" class="form-control" tabindex="1" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 offset-md-3">
+                                            <div class="input-group mb-1">
+                                                <div class="input-group-prepend">
+                                                    <button type="button" class="btn btn-primary"
+                                                        style="width: 85px;">BL No</button>
+                                                </div>
+                                                <input type="text" formControlName="bl" name="bl" id="bl"
+                                                    class="form-control" tabindex="2" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-1 offset-md-6">
+                                            <div class="input-group">
+                                                <b>OR</b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 offset-md-3">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <button type="button" class="btn btn-primary"
+                                                        style="width: 85px;">B/E No</button>
+                                                </div>
+                                                <input type="text" formControlName="be" name="be" id="be"
+                                                    class="form-control" tabindex="3" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-md-8 offset-md-2 text-center">
+                                            <button type="submit" (click)="onSubmit()" class="btn btn-success" tabindex="4">
+                                                Search
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2" *ngIf="calledApi">
+                                        <div class="col-md-12 text-center">
+                                            <p style="color: red;"><b>{{report.msg}}</b></p>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section *ngIf="calledApi">
+            <div class="container" *ngIf="loader">
+                <div class="row">
+                    <div class="col-12" style="text-align:center">
+                        <circle-progress class="circle__progress" [percent]="90" [animation]="true"
+                            [animationDuration]="2000" [startFromZero]="true" [showInnerStroke]="false"
+                            [outerStrokeWidth]="5" [titleFontSize]="'28'" [titleFontWeight]="'900'" [unitsFontSize]="'28'"
+                            [unitsFontWeight]="'900'" [subtitle]="'Loading...'" [subtitleFontSize]="'12'" [radius]="50"
+                            [lazy]="false" [maxPercent]="90">
+                        </circle-progress>
+                    </div>
+                </div>
+            </div>
+    
+            <section class="content" *ngIf="!loader">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 mt-3">
+    
+                            <div class="card">
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <table border="2" align="center" class="table-responsive-sm" style="width: 92%;">
+                                        <tr>
+                                            <th class="text-center table-primary" style="width:18%;">Rotation</th>
+                                            <td class="text-center">{{report.rotation}}</td>
+                                            <th class="text-center table-primary" style="width:18%;">BL No</th>
+                                            <td class="text-center">{{report.bl}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-center table-primary" style="width:18%;">Dest. Code</th>
+                                            <td class="text-center">{{report.dest_code}}</td>
+                                            <th class="text-center table-primary" style="width:18%;">Marks & Number</th>
+                                            <td class="text-center">{{report.marks_number}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-center table-primary" style="width:18%;">Consignee Description</th>
+                                            <td class="text-center">{{report.consignee_desc}}</td>
+                                            <th class="text-center table-primary" style="width:18%;">Status</th>
+                                            <td class="text-center">{{report.cont_status}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-center table-primary" style="width:18%;">Destination Name</th>
+                                            <td class="text-center">{{report.dest_name}}</td>
+                                            <th class="text-center table-primary" style="width:18%;">Notify Description</th>
+                                            <td class="text-center">{{report.notify_desc}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-center table-primary" style="width:18%;">Receive Pack</th>
+                                            <td class="text-center">{{report.rcv_pack}}</td>
+                                            <th class="text-center table-primary" style="width:18%;">Unstuffing Date</th>
+                                            <td class="text-center">{{report.unstuffing_dt}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-center table-primary" style="width:18%;">Vessel Name</th>
+                                            <td class="text-center">{{report.vessel_name}}</td>
+                                            <th class="text-center table-primary" style="width:18%;"></th>
+                                            <td class="text-center"></td>
+                                        </tr>
+                                    </table>
+    
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </section>
+    
+            <section class="content" *ngIf="!loader">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 mt-3">
+    
+                            <div class="card">
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-responsive-sm table-bordered table-condensed table-striped table-hover table-fixed table-sm">
+                                            <!--table-head-fixed text-nowrap-->
+                                            <thead>
+                                                <!--class="thead-dark"-->
+                                                <tr class="table-primary">
+                                                    <!--class="table-primary"-->
+                                                    <th class="text-center">Container</th>
+                                                    <th class="text-center">Seal</th>
+                                                    <th class="text-center">Size</th>
+                                                    <th class="text-center">Height</th>
+                                                    <th class="text-center">Position</th>
+                                                    <th class="text-center">Yard/Shed</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let containers of report.containers">
+                                                    <td scope="row" class="text-center">{{containers.container}}</td>
+                                                    <td scope="row" class="text-center">{{containers.seal}}</td>
+                                                    <td scope="row" class="text-center">{{containers.size}}</td>
+                                                    <td scope="row" class="text-center">{{containers.height}}</td>
+                                                    <td scope="row" class="text-center">{{containers.position}}</td>
+                                                    <td scope="row" class="text-center">{{containers.yard_shed}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6 text-right">
+                                            <button type="button" class="btn btn-primary" (click)='generatePdfFile()'>Certify View</button>
+                                        </div>
+                                        <div class="col-md-6 text-left">
+                                            <button type="button" class="btn btn-primary">Release Order</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </section>
+        </section>
+        
+
+    </div>
+    <!-- /.content-wrapper -->
+    <!-- Designation Category Form Ends -->
+    <app-footer></app-footer>
+</div>
+<!-- ./wrapper -->

@@ -1,0 +1,283 @@
+
+<div class="row">
+    <div class="col-12">
+        <h2 class="mt-3" align="center"><b>Chittagong Port Authority</b></h2>
+    </div>
+   
+</div>
+<table class="col-12" >
+    <tr>
+        <td colspan="4" align="left"><a [routerLinkActive]="['active']" [routerLink]="['/dashboard']"><img src="../../assets/img/back.png" height="30px" width="30px" align="middle" hspace="5"/>Back to Control Panel</a></td>
+        
+        <td colspan="8" align="left"> <h3><span >View Vessel Declaration Detail ( {{type}} )</span> </h3></td>
+       
+     <tr>   
+</table>    
+
+<!--table width="100%" class="mt-2">
+    <TR align="center">
+        <TD >
+            <h6><span >View Vessel Declaration Detail ( {{type}} )</span> </h6>
+        </TD>
+    </TR>
+    <TR align="left">
+        <TD colspan="6" ><a href=""><img src="../../assets/img/back.png" height="30px" width="30px" align="middle" hspace="5"/>Back to Control Panel</a>
+        </TD>
+    </TR>
+</table-->
+<form  [formGroup]="viewIgmGeneralForm" (ngSubmit)="onSubmit($any($event.target))">
+<table border="0" width="100%" class="mt-2">
+  
+        <TR valign="center" >
+         
+            <td  align="right"  width="30px">
+                <label for="rotation_no">Search:<em>&nbsp;</em> </label>
+            </td>
+            <td align="left" width="50px">
+                <select (change)="onValueChange($any($event.target).value)" name="searchType" class="form-control ">
+                    <option value="VName">Vessel Name</option>
+                    <option value="Voy">Voyage No</option>
+                    <option value="Import">Import Rot</option>
+                    <option value="Export">Export Rot</option> 
+                    <option value="port">Port of Shipment</option>   
+                    <option value="All">All</option>     
+                   
+                       
+                </select>
+            </td>
+            <td align="right" width="40px">
+                <input type="text" name="searchValue" placeholder="Search Value " class="form-control"  required >
+            </td>
+        
+            
+            <td align="left" width="40px">
+                &nbsp;
+                &nbsp;
+                <button  [disabled]="this.viewIgmGeneralForm.invalid"  class="btn btn-primary">Go</button>
+             
+            </td>
+      
+
+       
+</table>
+</form>
+<Br>
+<table class='table  table-bordered table-responsive table-hover table-striped table-sm mb-none w-auto small '>
+
+    <tr class="bg-light">
+        <!--th class="text-center">Sl</th-->
+        <th class="text-center">Agent Type</th>
+        <th class="text-center">Shipping Agent</th>
+        <th class="text-center">License Number</th>
+        <th class="text-center">Import Rotation No</th>
+        <th class="text-center">Export Rotation No</th>
+        <th class="text-center">Sailed Year</th>
+        <th class="text-center">Sailed Date</th>
+        <th class="text-center">Expected Date Of Arrival</th>
+        <th class="text-center">Actual Berth Date</th>
+        <th class="text-center">Final Entry Date</th>
+        <th class="text-center">Vessel Name</th>
+        <th class="text-center">Voy No</th>
+        <th class="text-center">Net Tonnage</th>
+        <th class="text-center">Name of Master</th>
+        <th class="text-center">Port of Depart</th>
+        <th class="text-center">Port of Destination</th>
+        <th class="text-center">Submission Date</th>
+        <th class="text-center">Action (Import)</th>
+        <th *ngIf="actionShow" class="text-center">Action (Export)</th>
+
+        <th *ngIf="accessibilityShow" class="text-center">Accessibility</th>
+        <th *ngIf="accessibilityShow" class="text-center">Accessibility</th>
+        <th *ngIf="accessibilityShow" class="text-center">Update Vessel Information</th>
+       
+    </tr>
+    
+   
+    <tbody *ngFor="let result of resultList">
+        <tr *ngFor="let res of result.resultList">
+        <td>{{res.submitee_Org_Type}}</td>
+        <td>{{res.org_name}}</td>
+        <td>{{res.s_Org_License_Number}}</td>
+        <td>{{res.import_Rotation_No}}</td>
+        <td>{{res.export_Rotation_No}}</td>
+        <td>{{res.sailed_Year}}</td>
+        <td>{{res.sailed_Date}}</td>
+        <td>{{res.eta_Date}}</td>
+        <td>{{res.actual_Berth}}</td>
+        <td>{{res.file_clearence_date}}</td>
+        <td>{{res.vessel_Name}}</td>
+        <td>{{res.voy_No}}</td>
+        <td>{{res.net_Tonnage}}</td>
+        <td>{{res.name_of_Master}}</td>
+        <td>{{res.port_of_Shipment}}</td>
+        <td>{{res.port_of_Destination}}</td>
+        <td>{{res.submission_Date}}</td> 
+        
+         <td>
+            <a  *ngIf="res.nmrwVvd > 0" href="" target="_BLANK" class="blink_me">
+                Import Vessel Layout
+            </a> 
+            <span  *ngIf="res.nmrwVvd <= 0" class="blink_me">  <font color="#911D21">  Vessel Visit Not Created</font></span> 
+            <a *ngIf="userRoleId==21 && res.file_clearence_date<'2013-09-03' && res.file_clearence_date=='' " 
+            href="igmOperation/viewIgmGeneral/{{type}}/5/0/1/{{res.id}}" ><br><hr> View IGM Sub Detail</a>               
+            <a  *ngIf="userRoleId!=21"  href="igmOperation/viewIgmGeneral/{{type}}/5/0/1/{{res.id}}" target="_BLANK"><br><hr> View IGM Sub Detail</a>
+
+            <a *ngIf= "(userRoleId==17 || userRoleId==29 || userRoleId==23 || userRoleId==25 || userRoleId==15 || userRoleId==19 || userRoleId==33 || userRoleId==37) && type=='BB'"
+             href="" target="upper_top"><br><hr>View Break Bulk TS</a>
+            <a *ngIf="(userRoleId==17 ||userRoleId==29 || userRoleId==23 || userRoleId==25 || userRoleId==15 || userRoleId==19 || userRoleId==33 || userRoleId==37) && type=='BB'"
+             href="" target="upper_top"><br><hr>View Break Bulk EMPTY</a>
+            <a *ngIf="(userRoleId==17 ||userRoleId==29 || userRoleId==23 || userRoleId==25 || userRoleId==15 || userRoleId==19 || userRoleId==33 || userRoleId==37) && type=='BB'"
+             href="" target="upper_top"><br><hr>View Break Bulk NIL</a>
+            <a *ngIf="(userRoleId==17 ||userRoleId==29 || userRoleId==23 || userRoleId==25 || userRoleId==15 || userRoleId==19 || userRoleId==33 || userRoleId==37) && type=='BB'"
+             href="" target="upper_top"><br><hr>Break Bulk Arms,Ammunition and Explosiv(Container)</a>
+            <a *ngIf="(userRoleId==17 ||userRoleId==29 || userRoleId==23 || userRoleId==25 || userRoleId==15 || userRoleId==19 || userRoleId==33 || userRoleId==37) && type=='BB'"
+             href="" target="upper_top"><br><hr>View Break Bulk Provision And Store Supply(Container)</a>
+            <a *ngIf="(userRoleId==17 ||userRoleId==29 || userRoleId==23 || userRoleId==25 || userRoleId==15 || userRoleId==19 || userRoleId==33 || userRoleId==37) && type=='BB'"
+             href="" target="upper_top"><br><hr>View Break Bulk ROB IGM Detail</a>
+            <a *ngIf="(userRoleId==17 ||userRoleId==29 || userRoleId==23 || userRoleId==25 || userRoleId==15 || userRoleId==19 || userRoleId==33 || userRoleId==37) && type=='BB'"
+             href="" target="upper_top"><br><hr>View Break Bulk IGM Retention Cargo(Container)</a>
+            
+         
+             <a *ngIf="userRoleId==21 && res.file_clearence_date < '2013-09-03'" 
+             href="" target="upper_top"><br><hr>View IGM Supplementary Detail</a>
+
+                <a *ngIf="(userRoleId==35 || userRoleId==23 || userRoleId==31 || userRoleId==1 || userRoleId==3) && (userRoleId==35 || userRoleId==31 || userRoleId==1)" 
+                href="igmOperation/ediUpload/{{res.id}}"><br><hr>EDI Upload</a>
+
+                <span *ngIf="(userRoleId==35 || userRoleId==23 || userRoleId==31 || userRoleId==1 || userRoleId==3)
+                 && (userRoleId==35 || userRoleId==31 || userRoleId==1) && (res.nmrwFile>0) &&(res.ediSt==0 && res.cntryCode!='BD')" > 
+                  <font color="#911D21"><br><hr> EDI not uploaded through myportpanel</font></span> 
+                  
+                  <!--a *ngIf="(userRoleId==35 || userRoleId==23 || userRoleId==31 || userRoleId==1 || userRoleId==3)
+                   && (res.nmrwFile>0) &&(res.ediSt!=0 || res.cntryCode=='BD' || (res.ediSt==0 && res.cntryCode=='BD') || (res.ediSt!=0 && res.cntryCode!='BD')  )" 
+                   href="" download="" (click)="downloadEdi(res.file_name_edi)"><br><hr>EDI Download</a-->
+
+                   <a *ngIf="(userRoleId==35 || userRoleId==23 || userRoleId==31 || userRoleId==1 || userRoleId==3)
+                   && (res.nmrwFile>0) &&(res.ediSt!=0 || res.cntryCode=='BD' || (res.ediSt==0 && res.cntryCode=='BD') || (res.ediSt!=0 && res.cntryCode!='BD')  )" 
+                   [routerLinkActive]="['active']" [routerLink]="[]" (click)="downloadEdi(res.file_name_edi)"><br><hr>EDI Download</a>
+                   
+				 <!--a *ngIf="(userRoleId==35 || userRoleId==23 || userRoleId==31 || userRoleId==1 || userRoleId==3)
+                 && (res.nmrwFile>0) &&(res.ediSt!=0 || res.cntryCode=='BD' || (res.ediSt==0 && res.cntryCode=='BD') || (res.ediSt!=0 && res.cntryCode!='BD'))"
+                  href="" download="" (click)="downloadEdi(res.file_name_stow)"><br><hr>Stow Plan Download</a-->
+
+                   <a *ngIf="(userRoleId==35 || userRoleId==23 || userRoleId==31 || userRoleId==1 || userRoleId==3)
+                 && (res.nmrwFile>0) &&(res.ediSt!=0 || res.cntryCode=='BD' || (res.ediSt==0 && res.cntryCode=='BD') || (res.ediSt!=0 && res.cntryCode!='BD'))"
+                  [routerLinkActive]="['active']" [routerLink]="[]" (click)="downloadEdi(res.file_name_stow)"><br><hr>Stow Plan Download</a>
+
+                 <a *ngIf="(userRoleId==21) &&  (res.file_clearence_date >'2013-09-03')" href=""><br><hr>View & Delete IGM Supplementary Detail</a>
+
+                 <!--a href="" download="" (click)="downloadEdi(res.file_name_edi)"><br><hr> EDI Download</a-->
+                 <a [routerLinkActive]="['active']" [routerLink]="[]" (click)="downloadEdi(res.file_name_edi)"><br><hr> EDI Download</a>
+
+                 <a *ngIf="(userRoleId==21) && (type=='GM') && (res.file_clearence_date >'2013-09-03') && (res.file_clearence_date=='')" 
+                    href="" style="color:blue" ><br><hr>Upload IGM Sub(GM) from Excel File</a>
+
+                <a *ngIf="userRoleId==19 || userRoleId==39 || userRoleId==37" href="" target="upper_top">
+                    <br><hr>View IGM Supplementary Detail</a>
+   
+
+                <a *ngIf="userRoleId==15 || userRoleId==23 || userRoleId==25 || userRoleId==27 || userRoleId==5"  
+                href="" target="_BLANK"><br><hr>View IGM Supplementary Detail</a> 
+                
+                <a *ngIf="userRoleId==33" href="" target="upper_top"><br><hr>View IGM Supplementary Detail</a>
+
+                <a *ngIf="type=='GM'" href="" target="upper_top"><br><hr>View TS IGM Detail</a>
+                <a *ngIf="type=='GM'" href=""><br><hr>View EMPTY IGM Detail</a>
+                <a *ngIf="type=='GM'" href=""><br><hr>View NIL IGM Detail</a>
+                <a *ngIf="type=='GM'" href="" target="upper_top"><br><hr>Arms,Ammunition and Explosiv(Container)</a>
+                <a *ngIf="type=='GM'" href="" target="upper_top"><br><hr>Provision And Store Supply(Container)</a>
+                <a *ngIf="type=='GM'" href="" target="upper_top"><br><hr>View ROB IGM Detail</a>
+                <a *ngIf="type=='GM'" href="" target="upper_top"><br><hr>View IGM Retention Cargo(Container)</a>
+
+                <a *ngIf="userRoleId==25" href=""><font color="blue"><hr>Upload Container (Recieved)</font></a>
+
+				<a *ngIf="userRoleId==25" href=""><font color="blue"><hr>Upload Container (Delivery)</font></a>
+                
+
+                <a *ngIf="(userRoleId==17 || userRoleId==15 || userRoleId==23  || userRoleId==25  || userRoleId==19  || userRoleId==33  || userRoleId==37  || userRoleId==41) &&(type=='GM') "
+                 href="" target="upper_top"><br><hr>View EGM Sub Detail</a>
+                <a *ngIf="(userRoleId==17 || userRoleId==15 || userRoleId==23  || userRoleId==25  || userRoleId==19  || userRoleId==33  || userRoleId==37  || userRoleId==41) &&(type=='GM') "
+                 href="" target="upper_top"><br><hr>View TS EGM Detail</a>
+                <a *ngIf="(userRoleId==17 || userRoleId==15 || userRoleId==23  || userRoleId==25  || userRoleId==19  || userRoleId==33  || userRoleId==37  || userRoleId==41) &&(type=='GM') "
+                href="" target="upper_top"><br><hr>View EMPTY EGM Detail</a>
+                <a *ngIf="(userRoleId==17 || userRoleId==15 || userRoleId==23  || userRoleId==25  || userRoleId==19  || userRoleId==33  || userRoleId==37  || userRoleId==41) &&(type=='GM') "
+                 href="" target="upper_top"><br><hr>View NIL EGM Detail</a>
+                <a *ngIf="(userRoleId==17 || userRoleId==15 || userRoleId==23  || userRoleId==25  || userRoleId==19  || userRoleId==33  || userRoleId==37  || userRoleId==41) &&(type=='GM') "
+                 href="" target="upper_top"><br><hr>Arms,Ammunition and Explosiv(Container)</a>
+                <a *ngIf="(userRoleId==17 || userRoleId==15 || userRoleId==23  || userRoleId==25  || userRoleId==19  || userRoleId==33  || userRoleId==37  || userRoleId==41) &&(type=='GM') "
+                 href="" target="upper_top"><br><hr>Provision And Store Supply(Container)</a>
+                <a *ngIf="(userRoleId==17 || userRoleId==15 || userRoleId==23  || userRoleId==25  || userRoleId==19  || userRoleId==33  || userRoleId==37  || userRoleId==41) &&(type=='GM') "
+                href="" target="upper_top"><br><hr>View ROB EGM Detail</a>
+                <a *ngIf="(userRoleId==17 || userRoleId==15 || userRoleId==23  || userRoleId==25  || userRoleId==19  || userRoleId==33  || userRoleId==37  || userRoleId==41) &&(type=='GM') "
+                 href="" target="upper_top"><br><hr>View EGM Retention Cargo(Container)</a>
+
+                 <a *ngIf="(userRoleId==17 || userRoleId==15 || userRoleId==23  || userRoleId==25  || userRoleId==19  || userRoleId==33  || userRoleId==37  || userRoleId==41) &&(type=='BB') "
+                   href="" target="upper_top"><br><hr>View EGM Break Bulk Sub Detail</a>
+                    <a *ngIf="(userRoleId==17 || userRoleId==15 || userRoleId==23  || userRoleId==25  || userRoleId==19  || userRoleId==33  || userRoleId==37  || userRoleId==41) &&(type=='BB') "
+                     href="" target="upper_top"><br><hr>View TS EGM Break Bulk Detail</a>
+                    <a *ngIf="(userRoleId==17 || userRoleId==15 || userRoleId==23  || userRoleId==25  || userRoleId==19  || userRoleId==33  || userRoleId==37  || userRoleId==41) &&(type=='BB') " 
+                    href="" target="upper_top"><br><hr>View EMPTY EGM Break Bulk Detail</a>
+                    <a *ngIf="(userRoleId==17 || userRoleId==15 || userRoleId==23  || userRoleId==25  || userRoleId==19  || userRoleId==33  || userRoleId==37  || userRoleId==41) &&(type=='BB') " 
+                    href="" target="upper_top"><br><hr>View NIL EGM Break Bulk Detail</a>
+                    <a *ngIf="(userRoleId==17 || userRoleId==15 || userRoleId==23  || userRoleId==25  || userRoleId==19  || userRoleId==33  || userRoleId==37  || userRoleId==41) &&(type=='BB') " 
+                    href="" target="upper_top"><br><hr>Arms,Ammunition and Explosiv(Container)</a>
+                    <a *ngIf="(userRoleId==17 || userRoleId==15 || userRoleId==23  || userRoleId==25  || userRoleId==19  || userRoleId==33  || userRoleId==37  || userRoleId==41) &&(type=='BB') "
+                     href="" target="upper_top"><br><hr>Provision And Store Supply(Container)</a>
+                    <a *ngIf="(userRoleId==17 || userRoleId==15 || userRoleId==23  || userRoleId==25  || userRoleId==19  || userRoleId==33  || userRoleId==37  || userRoleId==41) &&(type=='BB') " 
+                    href="" target="upper_top"><br><hr>View ROB EGM Break Bulk Detail</a>
+                    <a *ngIf="(userRoleId==17 || userRoleId==15 || userRoleId==23  || userRoleId==25  || userRoleId==19  || userRoleId==33  || userRoleId==37  || userRoleId==41) &&(type=='BB') " 
+                    href="" target="upper_top"><br><hr>View EGM Break Bulk Retention Cargo(Container)</a>
+            
+        </td>
+
+
+        <td *ngIf="(userRoleId==19) && (res.import_Rotation_No=='' && res.custom_approved==0) ">
+            <a href="">Assign Import Rotation Number</a><hr>
+            <a href="">Port Clearance</a><hr>
+            <a href="">Reject The Given Information</a>
+            <!--a *ngIf="res.file_clearence_date==''" href=""><hr>Final Entry</a-->
+       </td>
+
+       <td *ngIf="(userRoleId==19) && (res.import_Rotation_No=='' && res.custom_approved==1) ">
+        <a href="">Assign Import Rotation Number</a><hr>
+        <a href="">Port Clearance</a>
+        <!--a *ngIf="res.file_clearence_date==''" href=""><hr>Reject The Given Information</a-->
+      </td>
+      <td *ngIf="(userRoleId==19) && (res.import_Rotation_No!='' && res.custom_approved==0) ">
+        <a href="">Assign Import Rotation Number</a><hr>
+        <a href="">Port Clearance</a>
+        <!--a *ngIf="res.file_clearence_date==''" href=""><hr>Reject The Given Information</a-->
+      </td>
+      <td *ngIf="(userRoleId==19) && (res.import_Rotation_No!='' && res.custom_approved==1) ">
+        <a href="">Assign Import Rotation Number</a><hr>
+        <a href="">Port Clearance</a>
+        <!--a *ngIf="res.file_clearence_date==''" href=""><hr>Reject The Given Information</a-->
+      </td>
+      <td *ngIf="userRoleId==19">
+        <a href="" style='color:blue'>Update</a>
+    </td>
+
+      
+        
+      
+    </tr>
+    </tbody>
+   
+     
+   
+</table>
+<div *ngFor="let result of resultList" class="row">
+    <a  href="igmOperation/viewIgmGeneral/{{type}}/5/0/1" target="_blank" style="white-space: pre">&nbsp;&nbsp;&nbsp;&nbsp; First  </a>
+    <div *ngFor="let page of result.pagination" >
+        <!--a *ngIf="page.state==1" [routerLinkActive]="['active']"  [routerLink]="['igmOperation/igmContainerList/{{type}}/page.pageEndLimit/page.pageStratLimit/{{resultStatus}}', type,page.pageEndLimit,page.pageStratLimit,resultStatus]"  target="_blank" >{{page.sl}}</a-->
+        <!--a *ngIf="page.state==1" [routerLinkActive]="['active']"  [routerLink]="['igmOperation/igmContainerList/BB/{{page.pageEndLimit}}/{{page.pageStratLimit}}/1']"  target="_blank" >{{page.sl}}</a-->
+        <a *ngIf="page.state==1" href="igmOperation/viewIgmGeneral/{{type}}/{{page.pageEndLimit}}/{{page.pageStratLimit}}/{{resultStatus}}" target="_blank" style="white-space: pre" > {{page.sl}} </a>
+    </div>
+   
+
+</div>   
+
+
+
+
+

@@ -1,0 +1,226 @@
+<div class="wrapper">
+    <app-navbar></app-navbar>
+    <app-sidebar></app-sidebar>
+    <!-- Labor Category Form Starts -->
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <!-- <h1>Labor Category</h1> -->
+                    </div>
+                    <div class="col-sm-6">
+                      
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+    
+        
+        <section class="content">
+            <div class="container">
+                <div class="row">
+                  
+                    <div class="col-md-9 offset-md-1">
+                        <div class="card">
+                           
+                            <div class="card-body">
+                                <p class="h4 mb-4" align="center">UPLOAD FILE </p>
+                                <div *ngFor="let res of responseList">
+                                    <p *ngIf="res.message=='Successful'" class="h5 mb-4" align="center"><font color="#007A39">Successful</font></p>
+                                    <p *ngIf="res.message=='Failed'" class="h5 mb-4" align="center"><font color="#911D21">Failed</font></p>
+        
+                                </div>                     
+                                <form [formGroup]="uploadEdiForm" (ngSubmit)="onSubmit($any($event.target))">
+                                    <div class="row">
+                                        <div class="col-md-8 offset-md-2">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                
+                                                    <button type="button" class="btn btn-primary">Rotation</button>
+                                                </div>
+                                               
+                                                <input type="text"  name="rotation"  class="form-control" value="{{rotation}}">
+                                                
+                                            </div>                                        
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8 offset-md-2">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                
+                                                    <button type="button" class="btn btn-primary">IMP Voyage</button>
+                                                </div>
+                                               
+                                                <input type="text"  name="imp_voyage"  class="form-control" value="{{imp_voyage}}">
+                                                
+                                            </div>                                        
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8 offset-md-2">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                
+                                                    <button type="button" class="btn btn-primary">EXP Voyage</button>
+                                                </div>
+                                               
+                                                <input type="text"  name="exp_voyage"  class="form-control" value="{{exp_voyage}}"> 
+                                                
+                                            </div>                                        
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8 offset-md-2">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                
+                                                    <button type="button" class="btn btn-primary">Vessel Name</button>
+                                                </div>
+                                               
+                                                <input type="text"  name="vslName"  class="form-control" value="{{vslName}}">
+                                                
+                                            </div>                                        
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8 offset-md-2">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                
+                                                    <button type="button" class="btn btn-primary">GRT</button>
+                                                </div>
+                                               
+                                                <input type="text"  name="grt"  class="form-control" value="{{grt}}">
+                                                
+                                            </div>                                        
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8 offset-md-2">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                
+                                                    <button type="button" class="btn btn-primary">NRT</button>
+                                                </div>
+                                               
+                                                <input type="text"  name="nrt"  class="form-control" value="{{nrt}}">
+                                                
+                                            </div>                                        
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8 offset-md-2">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                
+                                                    <button type="button" class="btn btn-primary">IMO No.</button>
+                                                </div>
+                                               
+                                                <input type="text"  name="imo_no"  class="form-control" value="{{imo_no}}">
+                                                
+                                            </div>                                        
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8 offset-md-2">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                
+                                                    <button type="button" class="btn btn-primary">LOA</button>
+                                                </div>
+                                               
+                                                <input type="text"  name="loa"  class="form-control" value="{{loa}}">
+                                                
+                                            </div>                                        
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8 offset-md-2">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                
+                                                    <button type="button" class="btn btn-primary">Flag</button>
+                                                </div>
+                                               
+                                                <input type="text"  name="flag"  class="form-control" value="{{flag}}">
+                                                
+                                            </div>                                        
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8 offset-md-2">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                
+                                                    <button type="button" class="btn btn-primary">Call Sign</button>
+                                                </div>
+                                               
+                                                <input type="text"  name="call_sign"  class="form-control" value="{{call_sign}}">
+                                                
+                                            </div>                                        
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8 offset-md-2">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                
+                                                    <button type="button" class="btn btn-primary">Beam</button>
+                                                </div>
+                                               
+                                                <input type="text"  name="beam"  class="form-control" value="{{beam}}">
+                                                
+                                            </div>                                        
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-8 offset-md-2">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                
+                                                    <button type="button" class="btn btn-primary">Browse EDI File</button>
+                                                </div>
+                                               
+                                                <input type="file" name="edi"   class="form-control"
+                                                (change)="onEdIFileSelect($event)" #UploadEdiFileInput>
+                                            </div>                                        
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-8 offset-md-2">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                
+                                                    <button type="button" class="btn btn-primary">Browse Stow File</button>
+                                                </div>
+                                               
+                                                <input type="file" name="excelfile"   class="form-control"
+                                                (change)="onFileSelect($event)" #UploadFileInput>
+                                            </div>                                        
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="row">
+                                        <div class="col-md-8 offset-md-2 text-center">
+                                            <button [disabled]="this.uploadEdiForm.invalid"  class="btn btn-primary">Upload</button>
+                                        </div>
+                                    </div>
+                                </form>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+             </div>
+        </section>
+    </div>
+   <app-footer></app-footer>
+</div>
+
+
+

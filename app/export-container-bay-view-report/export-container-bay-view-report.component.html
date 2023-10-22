@@ -1,0 +1,104 @@
+<div *ngIf="resultList.length==0;else other_content">
+    <div align='center'><font color='red' size='5'><b>Sorry! Vessel {{vesselName}} is not drawn yet.Please contact with Datasoft people (+8801749923327) to draw this vessel...</b></font></div>   
+</div>
+<ng-template #other_content>
+<div class="col-12 mt-4">
+    <h2 align='center'>Vessel: {{vesselName}}, Rotation:  {{exportRotation}}</h2>
+    <h3 align='center'>Arrival Time:{{arrivalTime}}, Depart Time:{{departTime}}</h3>
+   
+</div>
+<div *ngFor="let result of resultList" class="row">
+
+    <table align="center" cellspacing="0" cellpadding="1">		
+        <tr>
+           <td></td>
+           <td *ngIf="result.centerLineA==1" [attr.colspan]="result.maxCol+1" class="nogrid" align="center" valign="bottom">
+               <b> Bay {{result.title}}</b>
+           </td>
+           <td *ngIf="result.centerLineA!=1" [attr.colspan]="result.maxCol" class="nogrid" align="center" valign="bottom">
+            <b> Bay {{result.title}}</b>
+           </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td *ngFor="let first of result.firstLimit"  class="nogrid" align="center">{{first.kl}}</td>
+            <td *ngIf="result.centerLineA==1" class="nogrid" align="center">00</td>
+            <td *ngIf="result.centerLineA==0 && result.gapLineA==1" class="nogrid" align="center"></td>
+            <td *ngFor="let last of result.lastLimit" class="nogrid" align="center">{{last.l}}</td>
+        </tr>
+        <tbody>
+            <tr *ngFor="let dynamicRowRes of result.dynamicRowList">
+                <td class="nogrid" align="center">{{dynamicRowRes.i}}</td>
+                <td *ngFor="let dynamicInnerRowRes of dynamicRowRes.dynamicInnerList"  [attr.class]="dynamicInnerRowRes.classType" align="center">
+                    {{dynamicInnerRowRes.resultpodSize}}  {{dynamicInnerRowRes.resultSId}}   {{dynamicInnerRowRes.resultMloTons}}
+                </td>  
+               
+                <td *ngIf="dynamicRowRes.state==1"  [attr.class]="dynamicRowRes.centerClassType" align="center">
+                    {{dynamicRowRes.resultCenterPodSize}} {{dynamicRowRes.resultCenterSId}} {{dynamicRowRes.resultCenterMloTons}}
+                </td>
+                <td *ngIf="dynamicRowRes.state==2" [attr.class]="dynamicRowRes.centerClassType" align="center"></td>
+                <td *ngIf="dynamicRowRes.state==3" [attr.class]="dynamicRowRes.centerClassType" align="center"></td>
+
+                <td *ngFor="let dynamicRightRowRes of dynamicRowRes.dynamicRightRowList"  [attr.class]="dynamicRightRowRes.classType" align="center">
+                    {{dynamicRightRowRes.resultpodSize}}  {{dynamicRightRowRes.resultSId}}   {{dynamicRightRowRes.resultMloTons}}
+                </td>
+                    <td class="nogrid" align="center">{{dynamicRowRes.dynamicRightRowSl}}</td>
+               
+    
+            </tr>
+            <tr>
+                <td align="center" style="font-family: Verdana,Geneva,sans-serif;">Total</td>
+                <td *ngFor="let table1TonsRes of result.table1TonsList" align="center" style="font-family: Verdana,Geneva,sans-serif;">{{table1TonsRes.table1TotalTons}}</td>
+                <td  *ngIf="result.table1TotalSate==1"  align="center" style="font-family: Verdana,Geneva,sans-serif;">{{result.table1Ton}}</td>
+                <td *ngIf="result.table1TotalSate==2" ></td>
+                <td *ngFor="let table1Tons2Res of result.table1TonsList2" align="center" style="font-family: Verdana,Geneva,sans-serif;">{{table1Tons2Res.table1TotalTons}}</td>
+            </tr> 
+
+            <tr *ngIf="result.isBelow==1">
+                <td></td>
+                <td *ngIf="result.centerLineA==1"  [attr.colspan]="result.maxCol+1" align="center"><hr></td>
+                <td *ngIf="result.centerLineA!=1" [attr.colspan]="result.maxCol" align="center"><hr></td>
+            </tr>
+
+            <tr *ngFor="let dynamicRowBelowRes of result.dynamicRowListBelow">
+                <td class="nogrid" align="center">{{dynamicRowBelowRes.b}}</td>
+                <td *ngFor="let dynamicInnerRowBelowRes of dynamicRowBelowRes.dynamicInnerBelowList"  [attr.class]="dynamicInnerRowBelowRes.classType" align="center">
+                    {{dynamicInnerRowBelowRes.resultpodSize}}  {{dynamicInnerRowBelowRes.resultSId}}   {{dynamicInnerRowBelowRes.resultMloTons}}
+                </td>  
+                <td *ngIf="dynamicRowBelowRes.stateTable2==1"  [attr.class]="dynamicRowBelowRes.centerClassTypeTable2" align="center">
+                    {{dynamicRowBelowRes.resultCenterPodSizeTable2}} {{dynamicRowBelowRes.resultCenterSIdTable2}} {{dynamicRowBelowRes.resultCenterMloTonsTable2}}
+                </td>
+                <td *ngIf="dynamicRowBelowRes.stateTable2==2" [attr.class]="dynamicRowBelowRes.centerClassTypeTable2" align="center"></td>
+
+                <td *ngFor="let dynamicRightRowBelowRes of dynamicRowBelowRes.dynamicRightRowBelowList"  [attr.class]="dynamicRightRowBelowRes.classType" align="center">
+                    {{dynamicRightRowBelowRes.resultpodSize}}  {{dynamicRightRowBelowRes.resultSId}}   {{dynamicRightRowBelowRes.resultMloTons}}
+                </td>
+                    <td class="nogrid" align="center">{{dynamicRowBelowRes.dynamicRightRowSl}}</td>
+                
+            </tr>
+            <tr *ngIf="result.isBelow==1">
+                <td align="center" style="font-family: Verdana,Geneva,sans-serif;">Total</td>
+                <td *ngFor="let table2TonsRes of result.table2TonsList" align="center" style="font-family: Verdana,Geneva,sans-serif;">{{table2TonsRes.table2TotalTons}}</td> 
+                <td  *ngIf="result.table2TotalSate==1"  align="center" style="font-family: Verdana,Geneva,sans-serif;">{{result.table2Ton}}</td>
+                <td *ngIf="result.table2TotalSate==2" ></td>
+                <td *ngFor="let table2Tons2Res of result.table2TonsList2" align="center" style="font-family: Verdana,Geneva,sans-serif;">{{table2Tons2Res.table2TotalTons}}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td *ngFor="let firstBelowRes of result.belowFirstList" class="nogrid" align="center">{{firstBelowRes.belowKlValue}}</td>
+                <td *ngIf="result.centerLineB==1" class="nogrid" align="center">00</td>
+                <td *ngIf="result.centerLineB==0 && result.gapLineB==1" class="nogrid" align="center"></td>
+                <td *ngFor="let lastBelowRes of result.belowLastList" class="nogrid" align="center">{{lastBelowRes.belowllValue}}</td>
+            </tr>
+            <tr>
+                <td colspan="12">&nbsp;</td>
+            </tr>
+            
+    </tbody>
+       
+        
+    </table>
+
+</div>
+
+</ng-template>

@@ -1,0 +1,247 @@
+
+<div class="row">
+    <div class="col-12">
+        <h2 class="mt-3" align="center"><b>Chittagong Port Authority</b></h2>
+    </div>
+   
+</div>
+
+<table width="100%" class="mt-2">
+    <TR align="center">
+        <TD >
+            <h4><span >IGM Container List</span> </h4>
+        </TD>
+    </TR>
+    <!--TR align="left">
+        <TD colspan="6" ><a href="<?php echo site_url('igmViewController/myPanelView') ?>"><img src="<?php echo IMG_PATH; ?>back.png" height="30px" width="30px" align="middle" hspace="5"/>Back to Control Panel</a>
+        </TD>
+    </TR-->
+</table>
+<form  [formGroup]="igmContainerListForm" (ngSubmit)="onSubmit($any($event.target))">
+<table border="0" width="100%" class="mt-2">
+  
+        <TR valign="center" >
+         
+            <td  align="right"  width="30px">
+                <label for="rotation_no">Search:<em>&nbsp;</em> </label>
+            </td>
+            <td align="right" width="40px">
+                <input type="text" name="rotation" placeholder="Rotation " class="form-control"  required >
+            </td>
+        
+            <td align="left" width="50px">
+                <select (change)="onValueChange($any($event.target).value)" name="searchType" class="form-control ">
+                    <option value="1">ALL</option>
+                    <option value="2">Change Container Status</option>
+                    <option value="3">Change Container Size</option>
+                    <option value="4">Change Container Height</option> 
+                    <option value="5">MLO Change</option>    
+                    <option value="6">Category Change</option>        
+                    <option value="7">Container Not Found</option>    
+                    <option value="8">Container Mismatch</option>    
+                    <option value="9">ISOCODE Mismatch</option>
+                    <option value="10">IGM not submitted by FF</option>        
+                       
+                </select>
+            </td>
+            <td align="left" width="40px">
+                &nbsp;
+                &nbsp;
+                <button  [disabled]="this.igmContainerListForm.invalid"  class="btn btn-primary">Go</button>
+             
+            </td>
+      
+
+       
+</table>
+<Br>
+<table class='table  table-bordered table-responsive table-hover table-striped table-sm mb-none '>
+
+    <tr class="bg-light">
+        <th class="text-center">Sl</th>
+        <th class="text-center">Shipping Agent</th>
+        <th class="text-center">MLO CODE</th>
+        <th class="text-center">Line No</th>
+        <th class="text-center">BL NO</th>
+        <th class="text-center" align="center">Importer Name</th>
+        <th class="text-center">Container Number</th>
+        <th width="400px" class="text-center" >Description of Goods</th>
+        <th class="text-center">Size</th>
+        <th class="text-center">Height</th>
+        <th class="text-center">ISO CODE</th>
+        <th class="text-center">Cont. Category</th>
+        <th class="text-center">Cont. Gross Weight</th>
+        <th class="text-center">Cont. Tare Weight</th>
+        <th class="text-center">Sealed NO.</th>
+        <th class="text-center">Cont. Status</th>
+        <th class="text-center">Cont. Type</th>
+        <th class="text-center" align="center">Commudity Code</th>
+        <th class="text-center">Cont. Vat</th>
+        <th class="text-center">Off dock Name</th>
+        <th class="text-center">Place of Unloading</th>
+        <th class="text-center">IMO</th>
+        <th class="text-center">UN</th>
+        <th class="text-center">Navy Comments</th>
+    </tr>
+    
+    <!--tr class="gridDark">
+        <td>Sl</td>
+        <td>Shipping Agent</td>
+        <td>MLO CODE</td>
+        <td>Line No</td>
+        <td>BL NO</td>
+        <td>Importer Name</td>
+        <td>Container Number</td>
+        <td width="400px">Description of Goods</td>
+        <td>Container Size</td>
+        <td>Height</td>
+        <td>ISO CODE</td>
+        <td>Cont. Category</td>
+        <td>Cont. Gross Weight</td>
+        <td>Cont. Tare Weight</td>
+        <td>Sealed NO.</td>
+        <td>Cont. Status</td>
+        <td>Cont. Type</td>
+        <td>Commudity Code</td>
+        <td>Cont. Vat</td>
+        <td>Off dock Name</td>
+        <td>Place of Unloading</td>
+        <td>IMO</td>
+        <td>UN</td>
+        <td>Navy Comments</td>
+    </tr-->
+    <tbody>
+     <tr *ngFor="let res of resultList"   class="bg-light">
+        <td align="center">{{res.sl}}</td>
+        <td *ngIf="res.state!=7" align="center">{{res.organization_Name}}</td>
+
+        <td *ngIf="res.mlo!='' && res.mlo!=null && res.state!=7" align="center"  ><b>{{res.mlocode}}<hr> N4: {{res.mlo}}</b></td>
+        <td *ngIf="(res.mlo=='' || res.mlo==null) && res.state!=7" align="center"  >{{res.mlocode}}</td>
+
+        <td *ngIf="res.state!=7" align="center">{{res.line_No}}</td>
+        <td *ngIf="res.state!=7" align="center">{{res.bl_No}}</td>
+        <td *ngIf="res.state!=7" align="center">{{res.notify_name}}</td>
+
+        <td *ngIf="res.containerNo!='' && res.containerNo!=null && res.state!=7" align="center" > <b>{{res.cont_number}}<hr> N4: {{res.containerNo}}</b></td>
+        <td *ngIf="(res.containerNo=='' || res.containerNo==null) && res.state!=7" align="center" >{{res.cont_number}}</td>
+
+        <td *ngIf="res.state!=7" width="400px" align="center">{{res.description_of_Goods}}</td>
+
+        <td *ngIf="res.size!='' && res.size!=null && res.state!=7" align="center"><b>{{res.cont_size}}<hr> N4: {{res.size}}</b></td>
+        <td *ngIf="(res.size=='' || res.size==null) && res.state!=7" align="center">{{res.cont_size}}</td>
+
+        <td *ngIf="res.height!=''  && res.height!=null && res.state!=7" align="center"><b>{{res.containerHeight}}<hr> N4: {{res.height}}</b></td>
+        <td *ngIf="(res.height=='' || res.height==null) && res.state!=7" align="center">{{res.containerHeight}}</td>
+
+        <td *ngIf="res.isoCode!='' && res.isoCode!=null && res.state!=7" align="center"><b>{{res.cont_iso_type}}<hr> N4: {{res.isoCode}} </b></td>
+        <td *ngIf="(res.isoCode=='' || res.isoCode==null) && res.state!=7" align="center">{{res.cont_iso_type}}</td>
+
+
+        <td *ngIf="res.category!=''  && res.category!=null && res.state!=7" align="center"><b>{{res.portCategory}}<hr> N4: {{res.category}}</b></td>
+        <td *ngIf="(res.category==''  || res.category==null) && res.state!=7" align="center">{{res.portCategory}}</td>
+
+        <td *ngIf="res.state!=7" align="center">{{res.cont_gross_weight}}</td>
+        <!--td>{{res.cont_weight}}</td-->
+        <td *ngIf="res.state!=7" align="center"></td>
+        <td *ngIf="res.state!=7" align="center">{{res.cont_seal_number}}</td>
+
+        <td *ngIf="res.freight_kind!=''  && res.freight_kind!=null" align="center"><b>{{res.cont_status}}<hr> N4: {{res.freight_kind}}</b></td>
+        <td *ngIf="(res.freight_kind=='' || res.freight_kind==null) && res.state!=7" align="center" >{{res.cont_status}}</td>
+
+        <td *ngIf="res.state!=7" align="center">{{res.cont_type}}</td>
+        <td *ngIf="res.state!=7" align="center">{{res.commudity_desc}}</td>
+        <td *ngIf="res.state!=7" align="center">{{res.cont_vat}}</td>
+        <td *ngIf="res.state!=7" align="center">{{res.off_dock_name}}</td>
+        <td *ngIf="res.state!=7" align="center"></td>
+        <td *ngIf="res.cont_imo!=0 && res.state!=7" align="center">{{res.cont_imo}}</td>
+        <td *ngIf="res.cont_imo==0 && res.state!=7" align="center"></td>
+
+        <td *ngIf="res.cont_un!=0 && res.state!=7" align="center">{{res.cont_un}}</td>
+        <td *ngIf="res.cont_un==0 && res.state!=7" align="center"></td>
+
+        <td *ngIf="res.state!=7" align="center"></td>
+         <td *ngIf="res.state==7" align="center" colspan="23"><b>{{res.state7Message}}</b></td>
+  
+    </tr>
+    <!--tr *ngFor="let res of resultList"   class="res.symblolClass">
+        <td>{{res.sl}}</td>
+        <td>{{res.organization_Name}}</td>
+
+        <td *ngIf="res.mlo!=''" bgcolor="res.mloBgcolor" ><b>{{res.mlocode}}<hr> N4: {{res.mlo}}</b></td>
+        <td *ngIf="res.mlo==''" bgcolor="res.mloBgcolor" >{{res.mlocode}}</td>
+
+        <td>{{res.line_No}}</td>
+        <td>{{res.bl_No}}</td>
+        <td>{{res.notify_name}}</td>
+
+        <td *ngIf="res.containerNo!=''" > <b>{{res.cont_number}}<hr> N4: {{res.containerNo}}</td>
+        <td *ngIf="res.containerNo!=''" >{{res.cont_number}}</td>
+
+        <td width="400px">{{res.description_of_Goods}}</td>
+
+        <td *ngIf="res.size!=''"><b>{{res.cont_size}}<hr> N4: {{res.size}}</b></td>
+        <td *ngIf="res.size==''">{{res.cont_size}}</td>
+
+        <td *ngIf="res.height!=''"><b>{{res.containerHeight}}<hr> N4: {{res.height}}</b></td>
+        <td *ngIf="res.height==''">{{res.containerHeight}}</td>
+
+        <td *ngIf="res.isoCode!=''"><b>{{res.cont_iso_type}}<hr> N4: {{res.isoCode}} </b></td>
+        <td *ngIf="res.isoCode==''">{{res.cont_iso_type}}</td>
+
+
+        <td *ngIf="res.category!=''"><b>{{res.portCategory}}<hr> N4: {{res.category}}</b></td>
+        <td *ngIf="res.category==''">{{res.portCategory}}</td>
+
+        <td>{{res.cont_gross_weight}}</td>
+     
+        <td></td>
+        <td>{{res.cont_seal_number}}</td>
+
+        <td *ngIf="res.freight_kind!=''"><b>{{res.cont_status}}<hr> N4: {{res.freight_kind}}</b></td>
+        <td *ngIf="res.freight_kind==''">{{res.cont_status}}</td>
+
+        <td>{{res.cont_type}}</td>
+        <td>{{res.commudity_desc}}</td>
+        <td>{{res.cont_vat}}</td>
+        <td>{{res.off_dock_name}}</td>
+        <td></td>
+        <td *ngIf="res.cont_imo!=0">{{res.cont_imo}}</td>
+        <td *ngIf="res.cont_imo==0"></td>
+
+        <td *ngIf="res.cont_un!=0">{{res.cont_un}}</td>
+        <td *ngIf="res.cont_un==0"></td>
+
+        <td></td>
+  
+    </tr-->
+</tbody>
+    <!--tr *ngFor="let res of resultList"   class="res.symblolClass">
+        <td>{{res.sl}}</td>
+        <td>{{res.organization_Name}}</td>
+        <td bgcolor="res.mloBgcolor" >{{res.mlocode}}</td>
+        <td>{{res.line_No}}</td>
+        <td>{{res.bl_No}}</td>
+        <td>{{res.notify_name}}</td>
+        <td>{{res.cont_number}}</td>
+        <td width="400px">{{res.description_of_Goods}}</td>
+        <td bgcolor="res.sizeBgcolor">{{res.cont_size}}</td>
+        <td bgcolor="res.contHeightBgcolor">{{res.containerHeight}}</td>
+        <td bgcolor="res.contIsoTypeBgcolor">{{res.cont_iso_type}}</td>
+        <td bgcolor="res.portCategoryBgColor">{{res.portCategory}}</td>
+        <td>{{res.cont_weight}}</td>
+        <td>{{res.cont_seal_number}}</td>
+        <td bgcolor="res.containerStatusBgColor">{{res.cont_status}}</td>
+        <td>{{res.cont_type}}</td>
+        <td>{{res.commudity_desc}}</td>
+        <td>{{res.cont_vat}}</td>
+        <td>{{res.off_dock_name}}</td>
+        <td></td>
+        <td>{{res.cont_imo}}</td>
+        <td>{{res.cont_un}}</td>
+        <td></td>
+    </tr-->
+</table>
+</form>
+
+
+

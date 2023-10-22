@@ -1,0 +1,120 @@
+<div class="row">
+    <div class="col-3">
+        <!--app-sidebar></app-sidebar-->
+    </div>
+    <div class="col-12 mt-4">
+       
+        <img align="center" src="../../assets/img/cpanew.jpg" class="rounded mx-auto d-block" alt="..." width="250px" height="80px">
+
+        <h3 align="center">Discharge Import Container List</h3>
+        <div class="row">
+            
+            <div class="col-6">
+                <h5 align="right" > Date : {{date}} </h5>
+            </div>
+            <div class="col-6">
+                <h5 align="left">Yard No : {{yardName}}</h5>
+            </div>
+            <!--div class="col-4">
+                <h5 align="center">Block No : {{block}}</h5>
+            </div-->
+            
+        </div>
+    </div>
+</div>
+
+<table border="1" align="center" style="border-collapse: collapse;">
+    <thead>
+        <tr>
+            <th rowspan="2">UNIT/YARD</th>
+            <th rowspan="2">SHIFT</th>
+            <th colspan="3">TOTAL ASSIGNMENT</th>
+            <th colspan="3">STRIPPED BY HHT</th>
+            <th colspan="3">BALANCE</th>
+            <th rowspan="2">REMARKS</th>
+        </tr>
+        <tr>
+            <th>20(L)</th>
+            <th>40(L)</th>
+            <th>Total</th>
+            <th>20(E)</th>
+            <th>40(E)</th>
+            <th>Total</th>
+            <th>20(L)</th>
+            <th>40(L)</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr align="center">
+            <td>{{yardName}}</td>
+            <td>A</td>
+            <td> {{j20}}</td>
+            <td> {{j40}}</td>
+            <td> {{j20+j40}}</td>
+            <td> {{a20}}</td>
+            <td> {{a40}}</td>
+            <td> {{a20+a40}}</td>
+            <td>
+                
+                {{j20-a20}}
+                    
+
+            </td>
+            <td>
+                {{j40-a40}}
+                
+            </td>
+            <td> {{j20-a20+j40-a40}}</td>
+            <td width="150"></td>
+        </tr>
+        <tr align="center">
+            <td> {{yardName}}</td>
+            <td>B</td>
+            <td>  {{j20-a20}}</td>
+            <td> {{j40-a40}}</td>
+            <td>{{j20-a20+j40-a40}}</td>
+            <td>{{b20}}</td>
+            <td> {{b40}}</td>
+            <td> {{b20+b40}}</td>
+            <td>
+                
+                     {{j20-a20-b20}}
+                   
+                
+            </td>
+            <td>
+                
+                   
+                {{j40-a40-b40}}
+                        
+                   
+                
+            </td>
+            <td>{{j20-a20-b20+j40-a40-b40}}</td>
+            <td></td>
+        </tr>
+        <tr align="center">
+            <td>{{yardName}}</td>
+            <td>C</td>
+            <td> {{j20-a20-b20}}</td>
+            <td> {{j40-a40-b40}}</td>
+            <td>{{j20-a20-b20+j40-a40-b40}}</td>
+            <td>{{c20}}</td>
+            <td> {{c40}}</td>
+            <td> {{c20+c40}}</td>
+            <td>
+                
+                   {{j20-a20-b20-c20}}
+                  
+            </td>
+            <td>
+              {{j40-a40-b40-c40}}
+                       
+            </td>
+            <td>{{j20-a20-b20-c20+j40-a40-b40-c40}}</td>
+            <td> Stayed: {{stayed}}</td>
+        </tr>
+    </tbody>
+</table>
+

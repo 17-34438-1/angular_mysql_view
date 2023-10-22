@@ -1,0 +1,69 @@
+<div class="col-md-12  mt-3 offset-md-3 ">
+    <div class="card ">
+        <div class="card-body ">
+            <p class="h6 mb-4" align="center">APPRAISE RE-SLOT LOCATION</p>                     
+            <form  [formGroup]="appRaiseReSoltLocationForm" (ngSubmit)="onSubmit($any($event.target))">
+               
+
+                <div class="row">
+                    <div class="col-md-12">
+                        
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <button type="button" class="btn btn-primary"> Search Date</button>
+                            </div>
+                            <input type="date" name="searchDate" placeholder="" class="form-control"  required >
+                           
+                        </div>                                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <button type="button" class="btn btn-primary">Cotainers</button>
+                            </div>
+                            <textarea  name="containers" placeholder="Cotainer No" class="form-control"  required ></textarea>
+                           
+                        </div>                                        
+                    </div>
+                </div>
+                <div class="container mt-3">
+                    <div class="row">
+                        <div class="col-4 text-center">
+                            <label class="radio-inline">
+                                <input type="radio" name="fileType" value="xl"/> Excel 
+                           </label>
+                        </div>
+                        <div class="col-4 text-center">
+                             <!--label class="radio-inline">
+                                <input type="radio" name="fileType" value="html" checked /> PDF
+                            </label-->
+                        </div>
+                        <div class="col-4 text-center">
+                            <label class="radio-inline">
+                                <input type="radio" name="fileType" value="html" checked /> Html
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                    
+
+                
+            
+               
+                <div class="row">
+                    <div class="col-md-8 offset-md-2 text-center">
+                        <button  [disabled]="this.appRaiseReSoltLocationForm.invalid"  class="btn btn-primary">Show</button>
+                    </div>
+                </div>
+            </form>                                
+        </div>
+    </div>
+</div>
+
+
+
+
+

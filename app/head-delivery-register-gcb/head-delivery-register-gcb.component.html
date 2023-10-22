@@ -1,0 +1,99 @@
+<div class="row">
+    <div class="col-3">
+        <!--app-sidebar></app-sidebar-->
+    </div>
+    <div class="col-12 mt-4">
+       
+        <img align="center" src="../../assets/img/cpanew.jpg" class="rounded mx-auto d-block" alt="..." width="250px" height="80px">
+        <h3 align="center">OFFICE OF THE TERMINAL MANAGER</h3>
+        <h3 align="center">HEAD DELIVERY REGISTER REPORT OF GCB</h3>
+        <!--div class="row">
+            <div class="col-6">
+                <h5 align="right" > Date : {{date}} </h5>
+            </div>
+            <div class="col-6">
+                <h5 align="left">Yard : {{terminal}}</h5>
+            </div>
+            <div class="col-4">
+                <h5 align="center">Block No : {{block}}</h5>
+            </div>
+        </div-->
+    </div>
+</div>
+<div *ngFor="let r of resultList" class="row">
+    <div class="col-6">
+        <h5 align="right" > Date : {{date}} </h5>
+    </div>
+    <div class="col-6">
+        <h5 align="left">Yard : {{r.blockNo}}</h5>
+    </div>
+<div *ngFor="let result of r.gcbList" class="pagewidth" >
+    <table border="0" cellspacing="0" width="1000px">
+        <thead>
+            <tr>
+                <td colspan="4" style="font-size:16px;"><b>Assignment (Delivery) : {{result.mfdch_desc}}</b></td>
+            </tr>
+        </thead>
+        <tbody  *ngFor="let res of result.resultInfo;let i = index" >
+            <tr>
+                <td style="border:1px solid black;font-size:11px;"  align="center" height="30px" width="5px"><b>{{i+1}}</b></td>
+                <td style="border:1px solid black;font-size:11px;" colspan="3" height="30px"><b>C&F :{{ res.cf_name}}, Vessel :{{ res.v_name}}, Rotation :{{ res.rot_no}}, BL No: {{ res.bl_no}}</b></td>
+            </tr>
+        <tr>
+            <td style="border:1px solid black"></td>
+            <td style="border:1px solid black;padding:0px;margin:0px;" colspan="3" height="40px">
+                <table border="0" cellpadding="3" valign="top">
+                    <tr>
+                        <td width="50px"><b>B/E No:</b></td>
+                        <td width="200px">{{res.beNo}}</td>
+                        <td width="80px"><b>B/E Date:</b></td>
+                        <td width="100px">{{res.beDate}}</td>
+                        <td width="50px"><b>STC:</b></td>
+                        <td width="130px">{{res.stc}}</td>
+                    </tr>
+                    <tr>
+                        <td width="50px"><b>CP No:</b></td>
+                        <td width="200px">&nbsp;</td>
+                        <td width="80px"><b>CP Date:</b></td>
+                        <td width="100px">&nbsp;</td>
+                        <td width="50px"><b>Weight:</b></td>
+                        <td width="130px">{{res.weight}}</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td style="border:1px solid black" align="center" height="20px">&nbsp;</td>
+            <td style="border:1px solid black" align="center" width="120px" height="20px"><b>Cont No.</b></td>
+            <td style="border:1px solid black" align="center" width="450px" height="20px"><b>Cart Details</b></td>
+            <!--td style="border:1px solid black" align="center">From</td-->
+            <td style="border:1px solid black" align="center" width="100px" height="20px"><b>Signature & Mobile</b></td>
+        </tr>
+        <tr *ngFor="let cotainer of res.containerList">
+            <td style="border:1px solid black" align="center">&nbsp;</td>						
+            <td style="border:1px solid black" align="center">{{cotainer.containerNoAndSize}}</td>
+            <td *ngFor="let truck of res.truckInfo" style="border:1px solid black">
+                 <table width="100%" align="center" cellpadding="5px">
+                    <tr>
+                        <th>Truck ID</th>
+                        <th>Delivery Pack</th>
+                    </tr>
+                   
+                            <tr>
+                                <td align="center"><p style="font-family: ind_bn_1_001">{{truck.truck_id}}</p></td>
+                                <td align="center">{{truck.actual_delv_pack}} {{blank}} {{truck.pack_Unit}}</td>
+                            </tr>
+                   
+
+                </table>
+            </td>
+            <td style="border:1px solid black" align="center"></td>
+            <td style="border:1px solid black" align="center"></td>
+          
+        </tr>
+    </tbody>
+
+    </table>
+</div>
+</div>
+

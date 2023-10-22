@@ -1,0 +1,105 @@
+<div class="wrapper">
+    <app-navbar></app-navbar>
+    <app-sidebar></app-sidebar>
+    <!-- Labor Category Form Starts -->
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                     
+                    </div>
+                    <div class="col-sm-6">
+                       
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        
+        <section class="content">
+            <div class="container">
+                <div class="row">
+                  
+                    <div class="col-md-9 offset-md-1">
+                        <div class="card">
+                            <!-- <div class="card-header">
+                                <h3 class="card-title">Add New Labor Category</h3>                                
+                            </div> -->
+                            <div class="card-body">
+                                <p class="h4 mb-4" align="center">PANGOAN CONTAINERS CONVERTING FORM</p>
+                                <div *ngFor="let res of resultList">
+                                    <table *ngIf="res.resultSubList.length>0" class="table table-responsive table-bordered table-bordered table-sm mt-4 mx-auto col-md-9">
+                                        <!--tr><td colspan='9'><b>Listed Containers are need to be depart</b></td></tr-->
+                                        <tr>
+                                            <th colspan='2' class="text-center col-2" >Container</th>
+                                            <th colspan='2' class="text-center" >Category</th>
+                                            <th colspan='2'  class="text-center" >Status</th>
+                                            <th colspan='2'  class="text-center" >MLO</th>
+                                            <th colspan='2'  class="text-center" >Iso Type</th>
+                                        </tr>
+                                        <tr *ngFor="let result of res.resultSubList">
+                                            <td colspan='2' align="center" >{{result.cont_id}}</td>
+                                            <td colspan='2' align="center">{{result.category}}</td>
+                                            <td colspan='2'  align="center">{{result.fried_kind}}</td>
+                                            <td colspan='2'  align="center">{{result.mlo}}</td>
+                                            <td colspan='2'  align="center" >{{result.iso_code}}</td>
+                                        </tr>
+                                        <!--tr>
+                                            <td rowspan="5" colspan='5' align="center">{{res.strCont}}</td>
+                                        </tr-->
+                                    </table>
+                                    <table *ngIf="res.resultSubList.length>0" class="table table-responsive table-bordered table-bordered table-sm mt-4 mx-auto col-md-9">
+                                        <!--tr><td colspan='9'><b>Listed Containers are need to be depart</b></td></tr-->
+                                        <tr>
+                                            <th colspan='2' class="text-left col-2" >Containers</th>
+                                            
+                                        </tr>
+                                        <tr>
+                                            
+                                            <td colspan='2'  align="center" >{{res.strCont}}</td>
+                                        </tr>
+                                       
+                                    </table>
+                                </div>
+                                <!--div *ngFor="let res of resultList">
+                                    <p *ngIf="res.message=='Successful'" class="h5 mb-4" align="center"><font color="#007A39">Data successfully uploaded.</font></p>
+                                    <p *ngIf="res.message=='Failed'" class="h5 mb-4" align="center"><font color="#911D21">Data not uploaded.</font></p>
+        
+                                </div-->                     
+                                <form [formGroup]="covertPangaonContainerForm" (ngSubmit)="onSubmit($any($event.target))">
+                                  
+                                    <div class="row">
+                                        <div class="col-md-8 offset-md-2">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                  
+                                                    <button type="button" class="btn btn-primary">Visit Id</button>
+                                                </div>
+                                               
+                                                <input type="text" name="visit"   class="form-control"/>
+                                               
+                                            </div>                                        
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="row">
+                                        <div class="col-md-8 offset-md-2 text-center">
+                                            <button [disabled]="this.covertPangaonContainerForm.invalid"  class="btn btn-primary">Convert</button>
+                                        </div>
+                                    </div>
+                                </form>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+             </div>
+        </section>
+    </div>
+   <app-footer></app-footer>
+</div>
+
+
+
