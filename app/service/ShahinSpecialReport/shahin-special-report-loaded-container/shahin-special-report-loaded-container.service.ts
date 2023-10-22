@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { Workbook } from 'exceljs';
 
 import * as fs from 'file-saver';
-import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -25,15 +24,10 @@ export class ShahinSpecialReportLoadedContainerService {
   header: any =  ["Sl No", "Container No","ISO Type", "Type","MLO",  "Status","Weight","Pod","Stowage", "Loaded Time","Coming From","Commodity","User Id"]
 
   header1: any =  ["20", "40","20", "40",  "LD", "MT","20", "40","20", "40",  "LD", "MT"]
-  igmMisIp : string;
-  igmMisPort : string;
+
   constructor(
     private httpClient:HttpClient
-  ) { 
-
-    this.igmMisIp=environment.igmMisIp;
-    this.igmMisPort=environment.igmMisPort;
-  }
+  ) { }
 
   // ContainerBalanceList: any,  
   getResultWithExcel(rotation_no: any,export_date_and_rotation: any,containerOnboardInfo:any,dischargeContianerSummary:any) {
@@ -153,23 +147,23 @@ export class ShahinSpecialReportLoadedContainerService {
   }
 
   getLoadedContainerVesselInfo(rotation:String):Observable<any>{
-    return this.httpClient.get(this.igmMisIp+this.igmMisPort+`/ShahinSpecialReport/ShahinLoadedContainerVesselInfo/`+rotation);
+    return this.httpClient.get(`http://192.168.16.188:8081/ShahinSpecialReport/ShahinLoadedContainerVesselInfo/`+rotation);
   }
 
   getLoadedContaineVoyNo(rotation:String):Observable<any>{
-    return this.httpClient.get(this.igmMisIp+this.igmMisPort+`/ShahinSpecialReport/ShahinLoadedContainerVoyNo/`+rotation);
+    return this.httpClient.get(`http://192.168.16.188:8081/ShahinSpecialReport/ShahinLoadedContainerVoyNo/`+rotation);
   }
 
  getLoadedContainerReport(rotation_no:String,fromDate:any,toDate:any,fromTime:any,toTime:any):Observable<any>{
 
-    return this.httpClient.get(this.igmMisIp+this.igmMisPort+`/ShahinSpecialReport/ShahinReportLoadedContainer/`+rotation_no+"/"+fromDate+"/"+toDate+"/"+fromTime+"/"+toTime);
+    return this.httpClient.get(`http://192.168.16.188:8081/ShahinSpecialReport/ShahinReportLoadedContainer/`+rotation_no+"/"+fromDate+"/"+toDate+"/"+fromTime+"/"+toTime);
   }
 
   getLoadedContainerOnboardList(rotation_no:String,fromDate:any,toDate:any,fromTime:any,toTime:any):Observable<any>{
-    return this.httpClient.get(this.igmMisIp+this.igmMisPort+`/ShahinSpecialReport/ShahinReportLoadedContainerSummeryOnboardReport/`+rotation_no+"/"+fromDate+"/"+toDate+"/"+fromTime+"/"+toTime);
+    return this.httpClient.get(`http://192.168.16.188:8081/ShahinSpecialReport/ShahinReportLoadedContainerSummeryOnboardReport/`+rotation_no+"/"+fromDate+"/"+toDate+"/"+fromTime+"/"+toTime);
   }
   getLoadedContainerBalanceList(rotation_no:String,fromDate:any,toDate:any,fromTime:any,toTime:any):Observable<any>{
-    return this.httpClient.get(this.igmMisIp+this.igmMisPort+`/ShahinSpecialReport/ShahinReportLoadedContainerSummeryBalanceReportList/`+rotation_no+"/"+fromDate+"/"+toDate+"/"+fromTime+"/"+toTime);
+    return this.httpClient.get(`http://192.168.16.188:8081/ShahinSpecialReport/ShahinReportLoadedContainerSummeryBalanceReportList/`+rotation_no+"/"+fromDate+"/"+toDate+"/"+fromTime+"/"+toTime);
  
   }
 }

@@ -84,9 +84,6 @@ export class DgContainerDeliveryReportFormComponent implements OnInit {
 
      else {
       if(this.fromDate!="" && this.toDate!=""){ 
-  
-
-
         console.log("Shift:"+this.shift);
         console.log("formDate:"+this.fromDate);
         console.log("toDate:"+this.toDate);

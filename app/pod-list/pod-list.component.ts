@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { PodService } from '../service/ExportReports/pod/pod.service';
+import { PodListService } from '../service/podList/pod-list.service';
 
 @Component({
   selector: 'app-pod-list',
@@ -18,58 +16,62 @@ export class PodListComponent implements OnInit {
   CATEGORIES: any;
   page: number = 1;
   count: number = 0;
-  tableSize: number = 10;
+  tableSize: number = 5;
   tableSizes: any = [3, 6, 9, 12];
+  
 
   constructor(
-    private podService:PodService,
-    private toastr:ToastrService,
-    private router:Router
-  ) {
+    private podListData:PodListService,
+  ) { 
     this.pod_code="";
-   }
+  }
 
   ngOnInit(): void {
-    if(localStorage['status']!=1)
-    {
-      // console.log("### User logged out already ### ");
-      this.router.navigate(['/login']);
-      this.toastr.error('Login and try again.', 'Error',{
-        // timeOut:5000,
-        disableTimeOut: true,
-        tapToDismiss: false,
-        progressBar:true,
-        progressAnimation:'increasing',
-        positionClass:'toast-center-center',
-        closeButton:true
-      });
-      return;
-    }
 
-    this.podService.podlist().subscribe(data => {
+    // this.podListData.podlist().subscribe(data=> {
+    // this.dgInfo=data;
+    // console.log(data);
+    //  });
+
+     
+    this.podListData.podlist().subscribe(data => {
       console.log(data);
       this.podInfo = data;
       
     });
     this.onSubmit();
   }
+onSubmit(){
 
-  onSubmit(){
-    this.podService.podForlistdata(this.pod_code).subscribe(data => {
-      this.podInfo=data;     
-      //console.log(data);   
-    });
-  }
+  this.podListData.podForlistdata(this.pod_code).subscribe(data => {
+    this.podInfo=data;
+   
+    console.log(data);
+    //this.router.navigate(['/dg/dg-cont-discharge-summary-list']);
+ 
+  });
 
-  onTableDataChange(event: any) {
-    this.page = event;
-  }
-  onTableSizeChange(event: any): void {
-    this.tableSize = event.target.value;
-    this.page = 1;
-  }
-  onSearchInput(){
-    this.page = 1;
-  }
+  // this.podListData.podForlistdata(this.rotation_no).subscribe(data => {
+  //   console.log("welcome world");
+
+  //   this.dgInfo = data;
+  //   console.log(this.dgInfo);
+    
+  // });
+}
+
+
+onTableDataChange(event: any) {
+  this.page = event;
+  this.onSubmit();
+}
+onTableSizeChange(event: any): void {
+  this.tableSize = event.target.value;
+  this.page = 1;
+  this.onSubmit();
+}
+onSearchInput(){
+  this.page = 1;
+}
 
 }

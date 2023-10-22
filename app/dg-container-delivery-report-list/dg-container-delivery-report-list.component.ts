@@ -46,12 +46,12 @@ export class DgContainerDeliveryReportListComponent implements OnInit {
     this.Rotation= localStorage.getItem("dgContainerRotation");
     this.fromDate=localStorage.getItem("dgContainerFromDate");
     this.toDate= localStorage.getItem("dgContainerToDate");
-      if(this.shift=="rotation"){
+  if(this.shift=="rotation"){
                   console.log("Shift for to day :"+this.shift);
           console.log("From Date to day :"+this.Rotation)
 
           this.showRotation=true;
-          let response=this.dgContainerDeliveryReportService.getEquipmentHandlingPerformaceHistoryRtgList(this.shift,this.Rotation,this.fromDate,this.toDate);
+    let response=this.dgContainerDeliveryReportService.getEquipmentHandlingPerformaceHistoryRtgList(this.shift,this.Rotation,this.fromDate,this.toDate);
           response.subscribe(
             data=>{
               console.log(data)

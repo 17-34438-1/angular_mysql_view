@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ExportVesselListWithStatusService } from '../service/ExportReports/ExportVesselListWithStatusService/export-vessel-list-with-status-service.service';
+import { ExportVesselListWithStatusService } from '../service/ExportReports/export-vessel-list-with-status/export-vessel-list-with-status.service';
 
 @Component({
   selector: 'app-export-vessel-list-with-status-detail-list',

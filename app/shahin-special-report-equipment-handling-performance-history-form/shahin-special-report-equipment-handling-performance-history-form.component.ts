@@ -69,7 +69,8 @@ export class ShahinSpecialReportEquipmentHandlingPerformanceHistoryFormComponent
 
 
     else if(this.fileType=="html" &&  this.shift!="" && this.fromDate!=""){
-
+      console.log("Shift:"+this.shift);
+      console.log("FromDate:"+this.fromDate);
       if(this.shift=="Day" || this.shift=="Night"){
        this.fromTime="00:00";
         this.toDate="00-00-00"

@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../service/auth/auth.service';
 
-// const shajs = require('sha.js'); // error
 import * as shajs from 'sha.js'; 
 import {Md5} from 'ts-md5/dist/md5';
 
@@ -32,57 +31,61 @@ export class LoginComponent implements OnInit {
     this.password = "";
   }
 
-  currTime : any;
-
   ngOnInit(): void {
-
-    if(localStorage.getItem("accessToken")){      
-      this.router.navigate(['/dashboard']);
-    }
-    else{
-      this.loginForm = this.formBuilder.group({
-        loginId: ['', Validators.required],
-        password: ['', Validators.required]
-      });
-    }
+    this.loginForm = this.formBuilder.group({
+      loginId: ['', Validators.required],
+      password: ['', Validators.required]
+    });
   }
 
-  onSubmit() {
-
+  onSubmit() {   
+    //## ----- Encryption start ----- ##
     var sha1Val = shajs('sha1').update(this.password).digest('hex');
     this.password = sha1Val;
     const md5 = new Md5();
     var md5Val = md5.appendStr(sha1Val).end();
-
-    let addLoginData = {        
-      loginId : this.loginId,
-      password: md5Val
-    }
-      
-    this.authService.login(addLoginData).subscribe(data => {
-
-      if(data.status==1)    // login success
-      {
-        this.currTime = new Date().getTime();
     
-        console.log("Role Id when logged in : "+data.userRoleId);
-        localStorage.setItem("accessToken", data.accessToken);
-        localStorage.setItem("userRoleId", data.userRoleId);
-        localStorage.setItem("userRoleName", data.userRoleName);
-        localStorage.setItem("userName", data.userName);
-        localStorage.setItem("loginId", data.loginId);
-        localStorage.setItem("status", data.status);
-        localStorage.setItem("org_id", data.org_id);
-        localStorage.setItem("lic_no", data.lic_no);
+    //## ----- Encryption end ----- ##
 
-        localStorage.setItem("dr",data.duration);
-        localStorage.setItem("ep",this.currTime);
-        
-        this.router.navigate(['/dashboard']);
+    // console.log("On Submit");
+      let addLoginData = {        
+        loginId : this.loginId,
+        password: md5Val
       }
-      else{
-        this.router.navigate(['/login']);
-        this.toastr.error('Invalid Username or Password', 'Error',{
+      // console.log(addLoginData);
+      this.authService.login(addLoginData).subscribe(data => {
+        console.log("Success");
+        console.log(data);
+
+        if(data.status==1)    // login success
+        {
+          localStorage.setItem("accessToken", data.accessToken);
+          localStorage.setItem("userRoleId", data.userRoleId);
+          localStorage.setItem("userRoleName", data.userRoleName);
+          localStorage.setItem("userName", data.userName);
+          localStorage.setItem("loginId", data.loginId);
+          localStorage.setItem("status", data.status);
+          localStorage.setItem("org_id", data.org_id);
+          localStorage.setItem("lic_no", data.lic_no);
+          this.router.navigate(['/dashboard']);
+        }
+        else{
+          this.router.navigate(['/login']);
+          this.toastr.error('Invalid Username or Password', 'Error',{
+            // timeOut:5000,
+            disableTimeOut: true,
+            tapToDismiss: false,
+            progressBar:true,
+            progressAnimation:'increasing',
+            positionClass:'toast-center-center',
+            closeButton:true
+          });
+        }        
+      },err => {
+        console.log("Err");
+        console.log(err);
+
+        this.toastr.error('Failed', 'Error',{
           // timeOut:5000,
           disableTimeOut: true,
           tapToDismiss: false,
@@ -91,22 +94,8 @@ export class LoginComponent implements OnInit {
           positionClass:'toast-center-center',
           closeButton:true
         });
-      }        
-    },err => {
-      console.log("Err");
-      console.log(err);
-
-      this.toastr.error('Failed', 'Error',{
-        // timeOut:5000,
-        disableTimeOut: true,
-        tapToDismiss: false,
-        progressBar:true,
-        progressAnimation:'increasing',
-        positionClass:'toast-center-center',
-        closeButton:true
-      });
-      this.router.navigate(['/login']);
-      });
+        this.router.navigate(['/login']);
+       });
   }
 
 }

@@ -9,9 +9,10 @@ import { ExportMloWisePreAdvisedLoadedContainerService } from '../service/Export
   styleUrls: ['./export-mlo-wise-pre-advised-loaded-container-list-form.component.css']
 })
 export class ExportMloWisePreAdvisedLoadedContainerListFormComponent implements OnInit {
+  
 rot_no:any;
-
 MloWisePreAdvisedLoadedContainer:any;
+
   constructor(
     private router:Router,
     private toastr:ToastrService,

@@ -1,4 +1,5 @@
 
+import { NotifierService } from 'angular-notifier';
 import * as fs  from 'file-saver';
 
 
@@ -47,7 +48,8 @@ export class TodaysEdiDeclarationComponent implements OnInit {
      for (let yardInfo of data) {
       this.file_name_edi = yardInfo.file_name_edi;
       this.file_name_stow = yardInfo.file_name_stow;
-        console.log("file_name_edi:"+this.path+this.file_name_edi);
+      let path=this.path+this.file_name_edi
+        console.log("file_name_edi:"+path);
     }
 
 
@@ -64,7 +66,6 @@ export class TodaysEdiDeclarationComponent implements OnInit {
     fs.saveAs(blob, path);
 
    }
-   
    onSubmitDoneForStow(file_name_stow:any){
     let blob = new Blob([this.path+file_name_stow], { type: 'application/pdf' });
     fs.saveAs(blob, this.path+file_name_stow);

@@ -38,7 +38,7 @@ export class UploadExcelForPangaonComponent implements OnInit {
   ngOnInit(): void {
     if(localStorage['status']!=1)
     {
-   
+      // console.log("### User logged out already ### ");
       this.router.navigate(['/login']);
       this.toastr.error('Login and try again.', 'Error',{
         // timeOut:5000,
@@ -104,9 +104,6 @@ export class UploadExcelForPangaonComponent implements OnInit {
       return false;
     }
     else{
-
-
-
       if(this.size<=2){
         console.log("ok")
         const formData = new FormData();
@@ -121,9 +118,6 @@ export class UploadExcelForPangaonComponent implements OnInit {
         });
 
       }
-
-
-
       else{
         this.toastr.error('File size is getter than 2MB', 'Error',{
           // timeOut:5000,

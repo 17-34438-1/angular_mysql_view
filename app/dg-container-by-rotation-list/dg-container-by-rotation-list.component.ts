@@ -36,7 +36,7 @@ export class DgContainerByRotationListComponent implements OnInit {
    
     });
 
-     this.tmp_rot_no=localStorage.getItem("dg_manifest_tmp_rot_no");
+    this.tmp_rot_no=localStorage.getItem("dg_manifest_tmp_rot_no");
     this.rotation_no=tmp_rot_no.toString().replace("_","/");
 
     console.log(this.rotation_no);

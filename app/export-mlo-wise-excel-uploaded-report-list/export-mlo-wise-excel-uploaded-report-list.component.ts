@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ExportExcelUploadSampleService } from '../service/ExportReports/export-excel-upload-sample/export-excel-upload-sample.service';
+import { MloWiseExcelUploadedService } from '../service/ExportReports/mlo-wise-excel-uploaded/mlo-wise-excel-uploaded.service';
 
 @Component({
   selector: 'app-export-mlo-wise-excel-uploaded-report-list',
@@ -31,7 +31,7 @@ export class ExportMloWiseExcelUploadedReportListComponent implements OnInit {
   constructor(
     private toastr:ToastrService,
     private router: Router,
-    private mlo_wise_excel_uploaded:ExportExcelUploadSampleService
+    private mlo_wise_excel_uploaded:MloWiseExcelUploadedService
    
   ) { }
 

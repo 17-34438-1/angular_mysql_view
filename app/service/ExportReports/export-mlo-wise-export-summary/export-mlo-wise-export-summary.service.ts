@@ -4,15 +4,10 @@ import { Observable } from 'rxjs';
 import { Workbook } from 'exceljs';
 
 import * as fs from 'file-saver';
-import { environment } from 'src/environments/environment';
-
 @Injectable({
   providedIn: 'root'
 })
 export class ExportMloWiseExportSummaryService {
-  igmMisIp : string;
-  igmMisPort : string;
-
   fileName = 'MLO WISE EXPORT SUMMARY.xlsx';
   title: any = 'CHITTAGONG PORT AUTHORITY,CHITTAGONG';
   title1: any = 'MLO WISE EXPORT SUMMARY';
@@ -21,11 +16,7 @@ export class ExportMloWiseExportSummaryService {
   header: any =  ["Sl No", "Mlo_name","Mlo", "D_20",  "D_40", "H_40", "H_45","RH_40","R_20","OT_20", "FR_20","TK_20", "FR_40", "OT_40", "MD_20","MD_40","MH_40","MH_45","MRH_40","MR_20","MOT_20","MFR_20","MTK_20","MFR_40","MOT_40","Grand_tot","Tues"]
   constructor(
     private httpClient:HttpClient
-  ) { 
-    this.igmMisIp = environment.igmMisIp;
-    this.igmMisPort = environment.igmMisPort;
-
-  }
+  ) { }
 
   
   getResultWithExcel(mlo_wise_excel: any, rotation_no: any,vname: any,voyNo:any) {
@@ -102,8 +93,8 @@ export class ExportMloWiseExportSummaryService {
     worksheet.getColumn(26).width = 10;
     worksheet.getColumn(27).width = 10;
 
-    worksheet.getRow(1).outlineLevel = 200;
-    worksheet.getRow(1).alignment = { vertical: "middle", horizontal: "left" }
+    // worksheet.getRow(1).outlineLevel = 200;
+    // worksheet.getRow(1).alignment = { vertical: "middle", horizontal: "left" }
 
 
 
@@ -120,20 +111,20 @@ export class ExportMloWiseExportSummaryService {
 
 getVoyNo(rotation:String):Observable<any>
 {
-return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/ExportReport/ExportMloWiseSummaryVoyNo/`+rotation)
+return this.httpClient.get(`http://192.168.16.188:8093/ExportReport/ExportMloWiseSummaryVoyNo/`+rotation)
 }
 
 getvvdgkey(rotation:String):Observable<any>{
-  return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/ExportReport/ExportMLOWiseSummaryVvd_Gkey/`+rotation);
+  return this.httpClient.get(`http://192.168.16.188:8093/ExportReport/ExportMLOWiseSummaryVvd_Gkey/`+rotation);
 }
 
 getContainerVesselInfo(rotation:String):Observable<any>{
-  return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/ExportReport/ExportReportMloWiseExportSummaryVesselInfo/`+rotation);
+  return this.httpClient.get(`http://192.168.16.188:8093/ExportReport/ExportReportMloWiseExportSummaryVesselInfo/`+rotation);
 }
 
 
 getContainerList(rotation:String):Observable<any>{
-  return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/ExportReport/ExportReportMloWiseExportSummaryList/`+rotation);
+  return this.httpClient.get(`http://192.168.16.188:8093/ExportReport/ExportReportMloWiseExportSummaryList/`+rotation);
 }
 
 

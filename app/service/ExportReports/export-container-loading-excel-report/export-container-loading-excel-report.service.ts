@@ -4,25 +4,17 @@ import { Observable } from 'rxjs';
 import { Workbook } from 'exceljs';
 
 import * as fs from 'file-saver';
-import { environment } from 'src/environments/environment';
-
 @Injectable({
   providedIn: 'root'
 })
 export class ExportContainerLoadingExcelReportService {
 
-  igmMisIp : string;
-  igmMisPort : string;
 
   fileName = 'Export Container Loading Excel Report.xlsx';
   title: any = 'CHITTAGONG PORT AUTHORITY,CHITTAGONG';
   title1: any = 'Export Container Loading Excel Report';
   header: any = ["MLO", "2D", " 4D", " 4H", "45H", " 4RH", " 2RF", " 2OT", " 2FR", " 2TK", " 4FR", " 4OT", "2D", "4D", "4H", "45H", "4RH", "2RF", "2OT", "2FR", "2TK", " 4FR", "4OT", "Grand_tot", "Tues", "Weight"]
-  constructor(private httpClient: HttpClient) {
-    this.igmMisIp = environment.igmMisIp;
-    this.igmMisPort = environment.igmMisPort;
-
-   }
+  constructor(private httpClient: HttpClient) { }
 
   getResultWithExcel(export_date_and_rotation: any, rotation_no: any) {
     // Create workbook and worksheet
@@ -79,19 +71,19 @@ export class ExportContainerLoadingExcelReportService {
   }
 
   getContainerLoadingVesselInfo(rotation: String): Observable<any> {
-    return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/ExportReport/ExportContainerLodingVesselInfo/` + rotation);
+    return this.httpClient.get(`http://192.168.16.188:8093/ExportReport/ExportContainerLodingVesselInfo/` + rotation);
   }
 
   getContainerLoadingVoyNo(rotation: String): Observable<any> {
-    return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/ExportReport/ExportContainerLoadingVoyNo/` + rotation);
+    return this.httpClient.get(`http://192.168.16.188:8093/ExportReport/ExportContainerLoadingVoyNo/` + rotation);
   }
   getContainerLoadingList(rotation: String): Observable<any> {
-    return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/ExportReport/ExportLoadedContainerListLoadandEmptyInfo/` + rotation);
+    return this.httpClient.get(`http://192.168.16.188:8093/ExportReport/ExportLoadedContainerListLoadandEmptyInfo/` + rotation);
   }
   getContainerLoadingExcelReport(rotation_no: String, fromDate: any, toDate: any, fromTime: any, toTime: any): Observable<any> {
   
-    console.log(this.igmMisIp + this.igmMisPort +`/ExportReport/ExportReportContainerLoading/` + rotation_no + "/" + fromDate + "/" + toDate + "/" + fromTime + "/" + toTime);
+    console.log(`http://192.168.16.188:8093/ExportReport/ExportReportContainerLoading/` + rotation_no + "/" + fromDate + "/" + toDate + "/" + fromTime + "/" + toTime);
   
-    return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/ExportReport/ExportReportContainerLoading/` + rotation_no + "/" + fromDate + "/" + toDate + "/" + fromTime + "/" + toTime);
+    return this.httpClient.get(`http://192.168.16.188:8093/ExportReport/ExportReportContainerLoading/` + rotation_no + "/" + fromDate + "/" + toDate + "/" + fromTime + "/" + toTime);
   }
 }

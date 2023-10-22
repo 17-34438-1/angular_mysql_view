@@ -19,8 +19,10 @@ export class UploadExcelForPangaonService {
 
    uploadExcelForPangaon(data: any){
     console.log(data);
-    return this.httpClient.post(this.igmMisIp+this.igmMisPort+'/Pangaon/UploadExcelFileForPangaon', data);
+    return this.httpClient.post(`http://192.168.16.188:8081/Pangaon/UploadExcelFileForPangaon`,data);
   }
+
+  
   getIpAddress(){
     return this.httpClient.get("http://api.ipify.org/?format=json");
   }

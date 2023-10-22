@@ -62,7 +62,7 @@ export class LaborCategoryAddComponent implements OnInit {
         closeButton:true
       });
 
-      this.router.navigate(['labor/category/list']);
+      this.router.navigate(['laborCategoryList']);
     }, err => {      
       console.log(err);
       console.log(err.error.message);

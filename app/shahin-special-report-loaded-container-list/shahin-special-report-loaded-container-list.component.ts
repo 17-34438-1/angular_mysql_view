@@ -12,11 +12,6 @@ export class ShahinSpecialReportLoadedContainerListComponent implements OnInit {
 
 
 
-  // localStorage.setItem("Shahin_loaded_container_tmp_rot_no", tmp_rot_no);
-  // localStorage.setItem("Shahin_loaded_container_fromDate", this.fromDate);
-  // localStorage.setItem("Shahin_loaded_container_toDate", this.toDate);
-  // localStorage.setItem("Shahin_loaded_container_fromTime", this.fromTime);
-  // localStorage.setItem("Shahin_loaded_container_toTime", this.toTime);
 
 
   tmp_rot_no:any;

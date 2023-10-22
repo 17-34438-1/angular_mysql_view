@@ -1,28 +1,23 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Workbook } from 'exceljs';
 import * as fs from 'file-saver';
-import { environment } from 'src/environments/environment';
-
 @Injectable({
   providedIn: 'root'
 })
 export class CopinoService {
-  igmMisIp : string;
-  igmMisPort : string;
   fileName = 'Export Copino.xlsx';
   title: any = 'Export Copino';
   header: any = ["Sl No", "Container No.", "Size", "Height", "ISO Code", "MLO Code", "Status", "Weitht", "SealNo", "ComingFrom", "POD", "PermissionNo.", "Commmodity", "POL", "Remarks"]
-
   constructor(
-    private httpClient: HttpClient
-  ) { 
+    private httpClient: HttpClient,
+  ) { }
 
-    this.igmMisIp = environment.igmMisIp;
-    this.igmMisPort = environment.igmMisPort;
 
-  }
+
+
+
 
   getResultWithExcel(copinoInfo: any, rotation_no: any, vname: any) {
     // Create workbook and worksheet
@@ -62,15 +57,16 @@ export class CopinoService {
       i++;
       console.log(result["logDate"]);
 
-      // select cont_id,cont_size,cont_height,isoType,cont_mlo,cont_status,goods_and_ctr_wt_kg,seal_no 
-      // from ctmsmis.mis_exp_unit_preadv_req where rotation='$rot' order by 1
-
+  
 
       let row = worksheet.addRow([i, result["cont_id"], result["cont_size"], result["cont_height"], result["isoType"], result["cont_mlo"], result["cont_status"], result["goods_and_ctr_wt_kg"], result["seal_no"]]);
       let color = 'FF99FF99';
       row.eachCell((cell, number) => {
         cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
       });
+
+
+
 
     }
     worksheet.getColumn(1).width = 10;
@@ -99,15 +95,18 @@ export class CopinoService {
       fs.saveAs(blob, 'Export Copino.xlsx');
     });
 
+
+
+
   }
   copinoListData(rotation: String): Observable<any> {
 
-    return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/ExportReport/copinoData/` + rotation);
+    return this.httpClient.get(`http://192.168.16.188:8093/ExportReport/copinoData/` + rotation);
   }
 
   copinoList(rotation: String): Observable<any> {
 
-    return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/ExportReport/copino/` + rotation);
+    return this.httpClient.get(`http://192.168.16.188:8093/ExportReport/copino/` + rotation);
   }
 
 }

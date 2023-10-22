@@ -1,7 +1,7 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-// import { NotifierService } from 'angular-notifier';
+import { NotifierService } from 'angular-notifier';
 import { ToastrService } from 'ngx-toastr';
 
 import { BerthOperatorReportService } from '../service/berthOperatorReport/berth-operator-report.service';

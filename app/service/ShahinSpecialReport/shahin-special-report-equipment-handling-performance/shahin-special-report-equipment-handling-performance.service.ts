@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Workbook } from 'exceljs';
 import * as fs  from 'file-saver';
-import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +13,10 @@ export class ShahinSpecialReportEquipmentHandlingPerformanceService {
 
 
   header:any = ["SlNo","RTG # NO.","Start VMT Log In Time","End VMT Log Out Time","ID NO","RTG Operator Name", "Import Receiving", "Keep Down / Delivery","Delivery (OCD / Off Dock)","Shifting","Total Handling Boxes"];
-  igmMisIp : string;
-  igmMisPort : string;
+
   constructor(
     private httpClient: HttpClient
-  ) { this.igmMisIp=environment.igmMisIp;
-    this.igmMisPort=environment.igmMisPort; }
+  ) { }
 
 
 
@@ -33,7 +30,7 @@ export class ShahinSpecialReportEquipmentHandlingPerformanceService {
       toTime="00:00:00"
 
     }
-    return this.httpClient.get(this.igmMisIp+this.igmMisPort+`/ShahinSpecialReport/EquipmentHandlingPerformance/` +shift+"/"+fromDate+" /"+toDate+"/"+fromTime+"/"+toTime); 
+    return this.httpClient.get(`http://192.168.16.188:8081/ShahinSpecialReport/EquipmentHandlingPerformance/` +shift+"/"+fromDate+" /"+toDate+"/"+fromTime+"/"+toTime); 
   }
   getResultWithExcel(resultList:any,shift:any,fromDate:any,toDate:any){
     // Create workbook and worksheet
@@ -47,13 +44,8 @@ export class ShahinSpecialReportEquipmentHandlingPerformanceService {
      worksheet.addRow([]);
      let titleRow = worksheet.addRow(["","",this.title]);
      titleRow.alignment={ vertical: 'top', horizontal: 'left'};
-     titleRow.font = {  size: 16, underline: 'single', bold: true };
-
-    // let shiftTitle=worksheet.addRow(["","","","Shift : ",shift]);
-   //  shiftTitle.font={ size: 16, bold: true};
-
-     worksheet.addRow([]);
-    
+     titleRow.font = {  size: 16, underline: 'single', bold: true };     
+     worksheet.addRow([]);    
      if(toDate==""){
       var info=worksheet.addRow([" From Date : "+fromDate,"","","","","","     Shift : "+shift]);    
      }
@@ -91,12 +83,9 @@ export class ShahinSpecialReportEquipmentHandlingPerformanceService {
      for(let result of resultList){
       i++;
 
-
-
         let row = worksheet.addRow([i,result["eq"],result["log_In"],result["log_Out"],result["logBy"],result["short_name"],result["impRcv"],result["keepDlv"],result["dlvOcdOffDock"],result["shift"],result["totalHandingBox"]]);
         row.border={ top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' }};
         let color = 'FF99FF99';
-
 
         imRtotal=imRtotal+result["impRcv"];
         keepDTotal=keepDTotal+result["keepDlv"];

@@ -43,6 +43,7 @@ export class ShahinSpecialReportEquipmentHandlingPerformanceHistoryListComponent
     if( this.shift!="" && this.fromDate!=""){
       if(this.shift=="Day" || this.shift=="Night"){
                   console.log("Shift for to day :"+this.shift);
+          console.log("From Date to day :"+this.fromDate)
           let response=this.EquipmentHandlingPerformaceService.getEquipmentHandlingPerformaceHistoryRtgList(this.shift,this.fromDate,this.fromTime,this.toDate,this.toTime);
           response.subscribe(
             data=>{

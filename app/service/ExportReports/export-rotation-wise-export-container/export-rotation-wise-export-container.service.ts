@@ -4,14 +4,12 @@ import { Observable } from 'rxjs';
 import { Workbook } from 'exceljs';
 
 import * as fs from 'file-saver';
-import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExportRotationWiseExportContainerService {
-  igmMisIp : string;
-  igmMisPort : string;
+
   fileName = 'Rotation Wise Export Container.excel';
   title: any = 'CHITTAGONG PORT AUTHORITY,CHITTAGONG';
 
@@ -22,13 +20,7 @@ export class ExportRotationWiseExportContainerService {
   constructor(
     private httpClient:HttpClient
   )
-   {
-    this.igmMisIp = environment.igmMisIp;
-    this.igmMisPort = environment.igmMisPort;
-
-
-
-    }
+   { }
    
 
 
@@ -108,7 +100,7 @@ export class ExportRotationWiseExportContainerService {
   getExportRotationWiseExportContainer(fromDate:any,toDate:any):Observable<any>
 {
 
-   return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/ExportReport/ExportRotationWiseExportContainerReport/`+fromDate + "/"+toDate);
+   return this.httpClient.get(`http://192.168.16.188:8093/ExportReport/ExportRotationWiseExportContainerReport/`+fromDate + "/"+toDate);
 
 
 }

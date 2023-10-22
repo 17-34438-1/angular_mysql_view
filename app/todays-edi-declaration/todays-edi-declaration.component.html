@@ -48,7 +48,12 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-9">
-                                       
+                                        <table border="0" width="1000px" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td align="center"><img width="250px" height="80px" src="../../assets/img/cpanew.jpg"></td>
+                                            </tr>
+                                            
+                                        </table>
                                     </div>
                                   
                                 </div>
@@ -73,13 +78,11 @@
 
                                             <!-- download="{{yardList.file_name_stow}}"
                                             download="{{yardList.file_name_edi}}" -->
-                                            
+
                                             <!-- (click)="onSubmitDoneForStow(yardList.file_name_stow)" 
                                             (click)="onSubmitDoneForEdi(yardList.file_name_edi)"  -->
-                                            
-                                             <td class="text-center"  > <a  href="{{path}}"  download="{{yardList.file_name_edi}}" target="_blank" >{{yardList.file_name_edi}}</a></td>
 
-                                            <!-- <td class="text-center"  > <a  href="http://cpatos.gov.bd/pcs/resources/edi/{{yardList.file_name_edi}}"  download="{{yardList.file_name_edi}}" target="_blank">{{yardList.file_name_edi}}</a></td> -->
+                                            <td class="text-center"  > <a  href="{{path}}"  download="{{yardList.file_name_edi}}" target="_blank" >{{yardList.file_name_edi}}</a></td>
                                             <td class="text-center"  > <a  href="http://cpatos.gov.bd/pcs/resources/edi/{{yardList.file_name_stow}}"  download target="_blank">{{yardList.file_name_stow}}</a> </td>
                                             <td class="text-center"  > <a  (click)="onSubmitDoneEdi(yardList.id)"  >Done EDI</a> </td>
                                              <td class="text-center"  > <a  [routerLink]="['/IgmOperation/todaysEdiDeclarationList',yardList.id]"   target="_blank">View</a> </td>
@@ -87,8 +90,7 @@
                                             
                                             
                                             
-                                             <!-- <td class="text-center"  > <a  href="{{path}}"  download="{{yardList.file_name_edi}}" target="_blank" >{{yardList.file_name_edi}}</a></td> -->
-
+                                            
                                             <!-- <td><a href="http://cpatos.gov.bd/pcs/resources/edi/{{yardList.file_name_edi}}" class="btn btn-default" target="_blank" download="{{yardList.file_name_edi}}">Download Now</a></td> -->
                                            
                                            

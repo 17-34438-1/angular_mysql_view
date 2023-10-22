@@ -4,16 +4,13 @@ import { Observable } from 'rxjs';
 import { Workbook } from 'exceljs';
 
 import * as fs from 'file-saver';
-import { environment } from 'src/environments/environment';
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExportLoadedContainerService {
 
-  igmMisIp : string;
-  igmMisPort : string;
+ 
 
   fileName = 'Export Loaded  Container Report.xlsx';
   title: any = 'CHITTAGONG PORT AUTHORITY,CHITTAGONG';
@@ -33,11 +30,7 @@ export class ExportLoadedContainerService {
 
   constructor(
     private httpClient:HttpClient
-  ) { 
-    this.igmMisIp = environment.igmMisIp;
-    this.igmMisPort = environment.igmMisPort;
-
-  }
+  ) { }
 
   // ContainerBalanceList: any,  
   getResultWithExcel(export_date_and_rotation: any,containerOnboardInfo:any,rotation_no: any) {
@@ -157,22 +150,23 @@ export class ExportLoadedContainerService {
   }
 
   getLoadedContainerVesselInfo(rotation:String):Observable<any>{
-    return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/ExportReport/ExportLoadedContainerVesselInfo/`+rotation);
+    return this.httpClient.get(`http://192.168.16.188:8093/ExportReport/ExportLoadedContainerVesselInfo/`+rotation);
   }
 
   getLoadedContaineVoyNo(rotation:String):Observable<any>{
-    return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/ExportReport/ExportLoadedContainerVoyNo/`+rotation);
+    return this.httpClient.get(`http://192.168.16.188:8093/ExportReport/ExportLoadedContainerVoyNo/`+rotation);
   }
 
  getLoadedContainerReport(rotation_no:String,fromDate:any,toDate:any,fromTime:any,toTime:any):Observable<any>{
 
-    return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/ExportReport/ExportReportLoadedContainer/`+rotation_no+"/"+fromDate+"/"+toDate+"/"+fromTime+"/"+toTime);
+    return this.httpClient.get(`http://192.168.16.188:8093/ExportReport/ExportReportLoadedContainer/`+rotation_no+"/"+fromDate+"/"+toDate+"/"+fromTime+"/"+toTime);
   }
 
   getLoadedContainerOnboardList(rotation_no:String,fromDate:any,toDate:any,fromTime:any,toTime:any):Observable<any>{
-    return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/ExportReport/ExportReportLoadedContainerSummeryOnboardReport/`+rotation_no+"/"+fromDate+"/"+toDate+"/"+fromTime+"/"+toTime);
+    return this.httpClient.get(`http://192.168.16.188:8093/ExportReport/ExportReportLoadedContainerSummeryOnboardReport/`+rotation_no+"/"+fromDate+"/"+toDate+"/"+fromTime+"/"+toTime);
   }
   getLoadedContainerBalanceList(rotation_no:String,fromDate:any,toDate:any,fromTime:any,toTime:any):Observable<any>{
-    return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/ExportReport/ExportReportLoadedContainerSummeryBalanceReportList/`+rotation_no+"/"+fromDate+"/"+toDate+"/"+fromTime+"/"+toTime);
+    return this.httpClient.get(`http://192.168.16.188:8093/ExportReport/ExportReportLoadedContainerSummeryBalanceReportList/`+rotation_no+"/"+fromDate+"/"+toDate+"/"+fromTime+"/"+toTime);
+ 
   }
 }

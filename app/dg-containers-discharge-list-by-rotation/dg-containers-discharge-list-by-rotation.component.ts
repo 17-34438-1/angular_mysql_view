@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { DgContainersDischargeService } from '../service/dg-containers-discharge/dg-containers-discharge.service';
+import { DgContainersDischargeService }  from '../service/dg-containers-discharge/dg-containers-discharge.service';
 
 @Component({
   selector: 'app-dg-containers-discharge-list-by-rotation',
@@ -9,7 +9,6 @@ import { DgContainersDischargeService } from '../service/dg-containers-discharge
   styleUrls: ['./dg-containers-discharge-list-by-rotation.component.css']
 })
 export class DgContainersDischargeListByRotationComponent implements OnInit {
-
   dgInfo: any[];
   rot_number:any;
   

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { DgContainersDischargeService }  from '../service/dg-containers-discharge/dg-containers-discharge.service';
 import {Router} from '@angular/router'
 import { ToastrService } from 'ngx-toastr';
-import { DgContainersDischargeService } from '../service/dg-containers-discharge/dg-containers-discharge.service';
-
 @Component({
   selector: 'app-dg-containers-discharge-list-by-rotation-form',
   templateUrl: './dg-containers-discharge-list-by-rotation-form.component.html',
@@ -11,12 +10,7 @@ import { DgContainersDischargeService } from '../service/dg-containers-discharge
 export class DgContainersDischargeListByRotationFormComponent implements OnInit {
   rotation_no:any;
   options:any;
-  
-
-  //dgInfo:any[];
-  
   dgInfo:any;
-  excel=[];
   data:any;
   row:any;  
   rot_number:any;

@@ -2,15 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Workbook } from 'exceljs';
 import * as fs  from 'file-saver';
-import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class ExportEquipmentHandlingPerformanceRtgService {
-  igmMisIp : string;
-  igmMisPort : string;
-
-
   fileName= 'ExcelSheet.xlsx';
   ctgPortTitle="     CHITTAGONG PORT AUTHORITY,CHITTAGONG"
   title:any ="EQUIPMENT HANDLING PERFORMANCE HISTORY";
@@ -18,11 +13,7 @@ export class ExportEquipmentHandlingPerformanceRtgService {
 
   constructor(
     private httpClient: HttpClient
-  ) { 
-    this.igmMisIp = environment.igmMisIp;
-    this.igmMisPort = environment.igmMisPort;
-
-  }
+  ) { }
 
   getEquipmentHandlingPerformaceHistoryRtgList(shift:any,fromDate:any,fromTime:any,toDate:any,toTime:any){
 
@@ -34,7 +25,7 @@ export class ExportEquipmentHandlingPerformanceRtgService {
       toTime="00:00:00"
 
     }
-    return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/ExportReport/ExportEquipmentHandlingPerformanceRTG/` +shift+"/"+fromDate+" /"+toDate+"/"+fromTime+"/"+toTime); 
+    return this.httpClient.get(`http://192.168.16.188:8093/ExportReport/ExportEquipmentHandlingPerformanceRTG/` +shift+"/"+fromDate+" /"+toDate+"/"+fromTime+"/"+toTime); 
   }
   getResultWithExcel(resultList:any,shift:any,fromDate:any,toDate:any){
     // Create workbook and worksheet
@@ -49,6 +40,9 @@ export class ExportEquipmentHandlingPerformanceRtgService {
      let titleRow = worksheet.addRow(["","",this.title]);
      titleRow.alignment={ vertical: 'top', horizontal: 'left'};
      titleRow.font = {  size: 16, underline: 'single', bold: true };
+
+    // let shiftTitle=worksheet.addRow(["","","","Shift : ",shift]);
+   //  shiftTitle.font={ size: 16, bold: true};
 
      worksheet.addRow([]);
     

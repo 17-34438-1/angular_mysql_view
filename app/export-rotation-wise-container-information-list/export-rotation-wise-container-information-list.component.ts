@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ExportRotationWiseContainerInformationService } from '../service/ExportReports/ExportRotationWiseContainerInformationService/export-rotation-wise-container-information-service.service';
+import { ExportRotationWiseContainerInformationService } from '../service/ExportReports/export-rotation-wise-container-information/export-rotation-wise-container-information.service';
 
 @Component({
   selector: 'app-export-rotation-wise-container-information-list',
@@ -38,7 +38,9 @@ export class ExportRotationWiseContainerInformationListComponent implements OnIn
         
       }
       console.log("vessel_Name:"+this.vessel_Name);
-});
+    });
+
+    
   }
 
 }

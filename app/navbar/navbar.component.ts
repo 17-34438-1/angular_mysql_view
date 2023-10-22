@@ -20,25 +20,46 @@ export class NavbarComponent implements OnInit {
     private authService: AuthService
   ) { }
 
-  prevTime : any;
-  nextTime : any;
-  duration : any;
-
-   ngOnInit(): void {
-    this.nextTime = new Date().getTime();
-    this.prevTime = localStorage.getItem("ep");
-    this.duration = localStorage.getItem("dr");
-
-    if((this.nextTime - this.prevTime) > this.duration)
-    {
-      localStorage.clear();
-      this.router.navigate(['/login']);
-    }
+  ngOnInit(): void {
   }
 
   logout(){
-    localStorage.clear();
-    this.router.navigate(['/login']);
+    
+    var loginId = localStorage.getItem("loginId");
+    this.authService.logout(loginId).subscribe(data => {
+      console.log(data);
+
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("userRoleId");
+      localStorage.removeItem("userRoleName");
+      localStorage.removeItem("userName");
+      localStorage.removeItem("loginId");
+      localStorage.removeItem("status");
+      
+      this.toastr.success(data.message, 'Success',{
+        // timeOut:5000,
+        disableTimeOut: true,
+        tapToDismiss: false,
+        progressBar:true,
+        progressAnimation:'increasing',
+        positionClass:'toast-center-center',
+        closeButton:true
+      });
+
+      this.router.navigate(['/login']);
+    }, err => {
+      console.log(err);
+
+      this.toastr.error(err.error.message, 'Error',{
+        // timeOut:5000,
+        disableTimeOut: true,
+        tapToDismiss: false,
+        progressBar:true,
+        progressAnimation:'increasing',
+        positionClass:'toast-center-center',
+        closeButton:true
+      });
+    });
   }
 
 }

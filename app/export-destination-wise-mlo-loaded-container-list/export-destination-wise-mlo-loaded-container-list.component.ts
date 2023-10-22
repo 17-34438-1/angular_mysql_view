@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ExportDestinationWiseMloLoadedContainerServiceService } from '../service/ExportReports/export-destination-wise-mlo-loaded-container-service/export-destination-wise-mlo-loaded-container-service.service';
-
+import { ExportDestinationWiseMloLoadedContainerService } from '../service/ExportReports/export-destination-wise-mlo-loaded-container/export-destination-wise-mlo-loaded-container.service';
 @Component({
   selector: 'app-export-destination-wise-mlo-loaded-container-list',
   templateUrl: './export-destination-wise-mlo-loaded-container-list.component.html',
@@ -24,7 +23,7 @@ export class ExportDestinationWiseMloLoadedContainerListComponent implements OnI
 
     private toastr:ToastrService,
     private router: Router,
-    private exportDestinationWiseMloLoadedContainer:ExportDestinationWiseMloLoadedContainerServiceService
+    private exportDestinationWiseMloLoadedContainer:ExportDestinationWiseMloLoadedContainerService
   ) { }
 
   ngOnInit(): void {

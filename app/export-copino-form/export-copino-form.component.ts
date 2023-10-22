@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CopinoService } from '../service/ExportReports/copino/copino.service';
-
 @Component({
   selector: 'app-export-copino-form',
   templateUrl: './export-copino-form.component.html',
@@ -15,7 +15,6 @@ export class ExportCopinoFormComponent implements OnInit {
   options: any;
   rotation_no: any;
   copinoInfo: any;
-
   constructor(
     private toastr:ToastrService,
     private copinoService: CopinoService,
@@ -39,7 +38,6 @@ export class ExportCopinoFormComponent implements OnInit {
       return;
     }
   }
-
   onSubmit() {
 
 
@@ -101,5 +99,6 @@ export class ExportCopinoFormComponent implements OnInit {
     }
 
   }
+
 
 }

@@ -1,32 +1,20 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShahinSpecialReportLocationCertifyService {
 
-  igmMisIp : string;
-  igmMisPort : string;
 
-  constructor(  private httpClient:HttpClient) { 
-   this.igmMisIp=environment.igmMisIp;
-    this.igmMisPort=environment.igmMisPort;
-    }
+  constructor(  private httpClient:HttpClient) { }
 
   
  getLoadedContainerReport(data:any):Observable<any>{
 
-  return this.httpClient.patch(this.igmMisIp+this.igmMisPort+`/ShahinSpecialReport/ShahinLocationCertify/`,data);
+  return this.httpClient.patch(`http://192.168.16.188:8081/ShahinSpecialReport/ShahinLocationCertify/`,data);
   
 }
 
 }
-
-
-
-
- 

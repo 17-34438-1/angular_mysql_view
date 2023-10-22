@@ -31,7 +31,6 @@ export class ExportMloWiseLoadedContainerListComponent implements OnInit {
   constructor(
     private toastr:ToastrService,
     private router: Router,
-  
     private exportMloWiseLoadedContainerInformation:ExportMloWiseLoadedContainerService
   ) { }
 

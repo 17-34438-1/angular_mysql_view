@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ExportRotationWiseContainerInformationService } from '../service/ExportReports/ExportRotationWiseContainerInformationService/export-rotation-wise-container-information-service.service';
+import { ExportRotationWiseContainerInformationService } from '../service/ExportReports/export-rotation-wise-container-information/export-rotation-wise-container-information.service';
 
 @Component({
   selector: 'app-export-rotation-wise-container-information-form',
@@ -23,10 +23,10 @@ export class ExportRotationWiseContainerInformationFormComponent implements OnIn
     console.log("helow world");
     var rotation_no = this.rotation_no;
     console.log(rotation_no);
-    localStorage.setItem("export_RotationWiseContainerInformation", rotation_no);
+    localStorage.setItem("export_ContainerInformation", rotation_no);
     var tmp_rot_no = rotation_no.toString().replace("/", "_");
     console.log(tmp_rot_no);
-    this.router.navigate([]).then(data => window.open('exportReports/export-rotation-wise-container-information/list', '_blank'));
+    this.router.navigate([]).then(data => window.open('exportReports/export-container-baylist', '_blank'));
   
   }
 }

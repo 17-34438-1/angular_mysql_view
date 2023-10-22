@@ -1,6 +1,7 @@
 
-
+<div class="row">
     <div class="col-3">
+      
     </div>
     <div class="col-12 mt-4">
        
@@ -20,22 +21,22 @@
         </div>
       
 
-    
+        <!-- class="table table-bordered table-condensed table-striped table-hover table-fixed table-sm table-responsive-sm"  -->
    
-        <table  class="table table-bordered table-condensed table-striped table-hover table-fixed table-sm table-responsive-sm" id="equipmentListTable"  width="100%"  >
+        <table class="table table-bordered table-condensed table-striped table-hover table-sm table-responsive-sm" >
             <thead>
                 <tr>
                     
-                    <td style="border-width:3px;border-style: double;"><b>SlNo.</b></td>
-                    <td style="border-width:3px;border-style: double;"><b>RTG # NO.</b></td>
-                    <td style="border-width:3px;border-style: double;"><b>Start VMT Log in Time</b></td>
-                    <td style="border-width:3px;border-style: double;"><b>End VMT Log out Time</b></td>
-                    <td style="border-width:3px;border-style: double;"><b>ID NO</b></td>
-                    <td style="border-width:3px;border-style: double;"><b>RTG Operator Name</b></td>		
-                    <td style="border-width:3px;border-style: double;"><b>Export Receiving</b></td>
-                    <td style="border-width:3px;border-style: double;"><b>Yard Move</b></td>
-                    <td style="border-width:3px;border-style: double;"><b>Shifting</b></td>
-                    <td style="border-width:3px;border-style: double;"><b>Total Handling Boxes</b></td>
+                    <td  class="text-center"><b>SlNo.</b></td>
+                    <td  class="text-center"><b>RTG # NO.</b></td>
+                    <td  class="text-center"><b>Start VMT Log in Time</b></td>
+                    <td  class="text-center"><b>End VMT Log out Time</b></td>
+                    <td  class="text-center" ><b>ID NO</b></td>
+                    <td  class="text-center"  style="width:200px;" ><b>RTG Operator Name</b></td>		
+                    <td  class="text-center" ><b>Export Receiving</b></td>
+                    <td  class="text-center"><b>Yard Move</b></td>
+                    <td  class="text-center"><b>Shifting</b></td>
+                    <td  class="text-center"><b>Total Handling Boxes</b></td>
                    
                 </tr>
             </thead>
@@ -48,13 +49,13 @@
                     <td  align="center">{{result.logBy}}</td>           
                     <td  align="center">{{result.short_name}}</td>
                    
-                    <!-- <td scope="col" align="center">{{result.log_by}}</td> -->
                     <td scope="col" align="center">{{result.expRcv}}</td>
                     <td scope="col" align="center">{{result.yardMove}}</td>
                     <td scope="col" align="center">{{result.expShift}}</td>                
                     <td scope="col" align="center">{{result.totalHandingBox}}</td>
                    
                 </tr>
+                
                 <tr bgcolor="#E0FFFF" align="center">
                     <td  colspan="6"><font size="4"><b>Total:</b></font></td>                  
                     <td scope="col"><font size="4"><b>{{imRtotal}}</b></font></td>
@@ -68,7 +69,7 @@
         </table>
     </div>
    
-
+</div>
 
 
 

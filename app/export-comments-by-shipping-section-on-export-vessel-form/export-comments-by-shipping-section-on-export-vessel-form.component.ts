@@ -49,9 +49,8 @@ export class ExportCommentsByShippingSectionOnExportVesselFormComponent implemen
         this.exportcommentByShippingSection.getExportCommentsByShippingSection(this.fromDate,this.toDate).subscribe(data=>{
         this.exportCommentByShipping=data;
         console.log("excel Data:"+data);
-     
         this.exportcommentByShippingSection.getResultWithExcel(data, this.fromDate,this.toDate);
-   });
+    });
 
 
   }

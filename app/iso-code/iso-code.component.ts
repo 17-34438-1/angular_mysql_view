@@ -1,35 +1,39 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { IsoService } from '../service/ExportReports/iso/iso.service';
+import { HttpClient } from '@angular/common/http';
 
+import { IsoService } from '../service/ExportReports/iso/iso.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-iso-code',
   templateUrl: './iso-code.component.html',
   styleUrls: ['./iso-code.component.css']
 })
 export class IsoCodeComponent implements OnInit {
-
-  iso_code: any;
-  IsoList: any;
+  iso_code:any;
+  IsoList:any;
   filterTerm: any;
-
+ 
   page: number = 1;
   count: number = 0;
   tableSize: number = 5;
-  tableSizes: any = [3, 6, 9, 12];
-
+  // tableSizes: any = [3, 6, 9, 12];
   constructor(
-    private isoService: IsoService,
+    
+    // private isoCodeData:IsoCodeService,
+    private isoService:IsoService,
     private toastr: ToastrService,
     private http: HttpClient,
-    private router:Router
-  ) {
-    this.iso_code = "";
-  }
+   
+    private router: Router,
+    
+    ) {
+    this.iso_code="";
+   }
 
   ngOnInit(): void {
+
+
     if(localStorage['status']!=1)
     {
       // console.log("### User logged out already ### ");
@@ -46,27 +50,36 @@ export class IsoCodeComponent implements OnInit {
       return;
     }
 
-    this.isoService.IsoList().subscribe(data => {
-      this.IsoList = data;
+
+    this.isoService.IsoList().subscribe(data=>{
+      this.IsoList=data;
     });
     this.onSubmit();
   }
 
+
   onTableDataChange(event: any) {
     this.page = event;
+    this.onSubmit();
   }
   onTableSizeChange(event: any): void {
     this.tableSize = event.target.value;
     this.page = 1;
+    this.onSubmit();
   }
-  onSearchInput() {
+  onSearchInput(){
     this.page = 1;
   }
 
-  onSubmit() {
-    this.isoService.IsoListData(this.iso_code).subscribe(data => {
-      this.IsoList = data;
+
+  onSubmit(){
+    this.isoService.IsoListData(this.iso_code).subscribe(data=>{
+this.IsoList=data;
+
     });
   }
+
+
+
 
 }

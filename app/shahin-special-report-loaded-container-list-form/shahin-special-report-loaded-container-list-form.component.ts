@@ -45,19 +45,6 @@ export class ShahinSpecialReportLoadedContainerListFormComponent implements OnIn
   }
   onSubmit() {
 
-//     if(this.options=="xl"){
-//       var rotation_no = this.rotation_no;
-//       console.log(rotation_no);
-//       var tmp_rot_no = rotation_no.toString().replace("/", "_");
-//       console.log(tmp_rot_no);
-//       console.log(this.fromDate);
-//       let dischargeContainerList=this.shahinSpecialReportLoadedContainerService.getLoadedContainerReport(tmp_rot_no, this.fromDate, this.toDate, this.fromTime, this.toTime);
-//       let balanceOnBoardSummary= this.shahinSpecialReportLoadedContainerService.getLoadedContainerOnboardList(tmp_rot_no, this.fromDate, this.toDate, this.fromTime, this.toTime);
-//       let dischargeContianerSummary= this.shahinSpecialReportLoadedContainerService.getLoadedContainerBalanceList(tmp_rot_no, this.fromDate, this.toDate, this.fromTime, this.toTime);      
-//       forkJoin([dischargeContainerList]).subscribe(result=>{
-//       this.shahinSpecialReportLoadedContainerService.getResultWithExcel(result[0]);
-//       });
-// }
 
 
 
@@ -78,38 +65,6 @@ if(this.options=="xl"){
   
 }
 
-
-    // if (this.options == "xl") {
-
-    //   var rotation_no = this.rotation_no;
-    //   console.log(rotation_no);
-    //   var tmp_rot_no = rotation_no.toString().replace("/", "_");
-    //   console.log(tmp_rot_no);
-    //   console.log(this.fromDate);
-    //   this.shahinSpecialReportLoadedContainerService.getLoadedContainerReport(tmp_rot_no, this.fromDate, this.toDate, this.fromTime, this.toTime).subscribe(data => {
-    //     this.exportLoadedContainerReport = data;
-    //     console.log(data);
-    //     for (let containerDateAndRotation of data) {
-    //       this.rotation = containerDateAndRotation.rotation;
-
-    //       this.shahinSpecialReportLoadedContainerService.getLoadedContainerOnboardList(tmp_rot_no, this.fromDate, this.toDate, this.fromTime, this.toTime).subscribe(data => {
-    //         this.containerOnboardInfo = data;
-    //         console.log(data);
-    //       });
-  
-    //       this.shahinSpecialReportLoadedContainerService.getLoadedContainerBalanceList(tmp_rot_no, this.fromDate, this.toDate, this.fromTime, this.toTime).subscribe(data => {
-    //         this.containerBalance = data;
-    //         console.log(data);
-    //       });
-  
-       
-
-    //     }       
-    //     this.shahinSpecialReportLoadedContainerService.getResultWithExcel(data, this.containerOnboardInfo, this.rotation_no);
-    //     console.log(this.rotation);
-
-    //   });
-    // }
 
 
     if (this.options == "html") {

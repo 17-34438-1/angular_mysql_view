@@ -23,9 +23,7 @@ export class ShahinSpecialReportLocationCertifyComponent implements OnInit {
   constructor(
     private toastr: ToastrService,
     private router: Router,
-
-
-   private specialReportLocationCertifyService:ShahinSpecialReportLocationCertifyService
+    private shahinSpecialReportLocationCertifyService: ShahinSpecialReportLocationCertifyService
   ) {
 
   }
@@ -41,7 +39,7 @@ console.log("ddl_imp_bl_no:"+this.ddl_imp_bl_no)
       ddl_imp_bl_no: this.ddl_imp_bl_no,
       ddl_imp_cont_no: this.ddl_imp_cont_no,
       }
-    this.specialReportLocationCertifyService.getLoadedContainerReport(data).subscribe(data => {
+    this.shahinSpecialReportLocationCertifyService.getLoadedContainerReport(data).subscribe(data => {
       this.locataionCertify = data;
 
       this.totcont = this.locataionCertify.totcont;

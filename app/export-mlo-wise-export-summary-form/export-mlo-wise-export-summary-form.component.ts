@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { jsPDF } from "jspdf";
 import { ExportMloWiseExportSummaryService } from '../service/ExportReports/export-mlo-wise-export-summary/export-mlo-wise-export-summary.service';
 
 @Component({
@@ -42,7 +43,6 @@ export class ExportMloWiseExportSummaryFormComponent implements OnInit {
   }
   onSubmit(){
     if (this.options == "xl") {
-
       var rotation_no = this.rotation_no;
       console.log(rotation_no);
       var tmp_rot_no = rotation_no.toString().replace("/", "_");
@@ -84,21 +84,26 @@ export class ExportMloWiseExportSummaryFormComponent implements OnInit {
 
     }
 
-    if (this.options == "html") {
-  
-      console.log("helow world");
- 
+    if (this.options == "html") { 
       var rotation_no = this.rotation_no;
       console.log(rotation_no);
       localStorage.setItem("export_mlo_wise_export_summary_rotation_no", rotation_no);
       var tmp_rot_no = rotation_no.toString().replace("/", "_");
-      console.log(tmp_rot_no);
-    
+      console.log(tmp_rot_no);    
       this.router.navigate([]).then(data => window.open('exportReports/mlo-wise-export-summary/list', '_blank'));
-
-
-
     }
+
+      if (this.options == "pdf") { 
+      var rotation_no = this.rotation_no;
+      console.log(rotation_no);
+      localStorage.setItem("export_mlo_wise_export_summary_rotation_no", rotation_no);
+      var tmp_rot_no = rotation_no.toString().replace("/", "_");
+      console.log(tmp_rot_no);    
+      this.router.navigate([]).then(data => window.open('exportReports/mlo-wise-export-summary/list', '_blank'));
+    }
+
+
+
   }
 
 }

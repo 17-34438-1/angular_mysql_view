@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ExportLoadedContainerListLoadAndEmptyService } from '../service/ExportReports/export-loaded-container-list-load-and-empty/export-loaded-container-list-load-and-empty.service';
+import { ExportLoadedContainerListLoadAndEmptyServiceService } from '../service/ExportReports/export-Loaded-container-list-load-and-empty-service/export-loaded-container-list-load-and-empty-service.service';
 
 @Component({
   selector: 'app-export-loaded-container-list-load-and-empty-form',
@@ -13,7 +13,7 @@ export class ExportLoadedContainerListLoadAndEmptyFormComponent implements OnIni
   constructor(
     private toastr:ToastrService,
     private router: Router,
-    private exportDestinationWiseMloLoadedContainer:ExportLoadedContainerListLoadAndEmptyService
+    private exportDestinationWiseMloLoadedContainer:ExportLoadedContainerListLoadAndEmptyServiceService
   ) { }
 
   ngOnInit(): void {

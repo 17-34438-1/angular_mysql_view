@@ -11,55 +11,53 @@
             <tr>
                 <td>
                     <h4 align="center"><b>Export Container Block Report</b></h4>
-
-
-                    <h3  align="center"> Vessel Name:  {{vsl_Name}}   Voy:{{voYNo}}   Rotation No:{{ rotation_no}}  Ata: {{aTa}}</h3>
+                    <h5  align="center"> Vessel Name:  {{vsl_Name}}   Voy:{{voYNo}}   Rotation No:{{ rotation_no}}  Ata: {{aTa}}</h5>
                 </td>
             </tr>
         </table>
     </div>
 </div> 
-
-
-    <div>
-        <table width="100%" border='1' cellpadding='0' cellspacing='0' class="table table-bordered table-condensed table-striped table-hover table-fixed  table-responsive-sm" >
-            <thead>
-                <tr>
-                    <th>S No.</th>
-                    <th>ContainerNo</th>
-                    <th>Type</th>
-                    <th>MLO</th>
-                    <th>Status</th>
-                    <th>Weight</th>
-                
-                    <th>POD</th>
-                    <th>Stowage</th>
-                    <th>ComingFrom</th>
-                    <th>Commodity</th>
-                    <th>Remarks</th>
-                    <th>User Id</th>
-           
-    
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let container_block_report of containerBlockReport;let i=index;">
-                    <td>{{i+1}}</td>
-                    <td>{{container_block_report.contNo}}</td>
-                    <td>{{container_block_report.iso}}</td>
-                    <td>{{container_block_report.mlo}}</td>
-                    <td>{{container_block_report.contStatus}}</td>
-                    <td>{{container_block_report.weight}}</td>
-                    <td>{{container_block_report.pod}}</td>
-                    <td>{{container_block_report.stowage_pos}}</td>
-                    <td>{{container_block_report.coming_from}}</td>
-                    <td>{{container_block_report.commodity}}</td>
-                    <td>{{container_block_report.remarks}}</td>
-                    <td>{{container_block_report.user_id}}</td>
+<!-- border="1" width="95%" align="center" -->
+<!-- class="row" -->
+        <div style="margin-top:20px; margin-left:20px;margin-right:20px ;" >
+            <table class="table table-responsive-sm table-bordered table-condensed table-striped table-hover table-fixed table-sm" >
+                <thead>
+                    <tr>
+                        <th class="text-center"  style="border-width:3px;">S No.</th>
+                        <th class="text-center"  style="border-width:3px;">ContainerNo</th>
+                        <th class="text-center"  style="border-width:3px;">Type</th>
+                        <th class="text-center"  style="border-width:3px;">MLO</th>
+                        <th class="text-center"  style="border-width:3px;">Status</th>
+                        <th class="text-center"  style="border-width:3px;">Weight</th>
+                        <th class="text-center"  style="border-width:3px;">POD</th>
+                        <th class="text-center"  style="border-width:3px;">Stowage</th>
+                        <th class="text-center"  style="border-width:3px;">ComingFrom</th>
+                        <th class="text-center"  style="border-width:3px;">Commodity</th>
+                        <th class="text-center"  style="border-width:3px;">Remarks</th>
+                        <th class="text-center"  style="border-width:3px;">User Id</th>
                
-                </tr>
-            </tbody>
-        </table>
-    </div>
+        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let container_block_report of containerBlockReport;let i=index;">
+                        <td align="center">{{i+1}}</td>
+                        <td align="center">{{container_block_report.contNo}}</td>
+                        <td align="center">{{container_block_report.iso}}</td>
+                        <td align="center">{{container_block_report.mlo}}</td>
+                        <td align="center">{{container_block_report.contStatus}}</td>
+                        <td align="center">{{container_block_report.weight}}</td>
+                        <td align="center">{{container_block_report.pod}}</td>
+                        <td align="center">{{container_block_report.stowage_pos}}</td>
+                        <td align="center">{{container_block_report.coming_from}}</td>
+                        <td align="center">{{container_block_report.commodity}}</td>
+                        <td align="center">{{container_block_report.remarks}}</td>
+                        <td align="center">{{container_block_report.user_id}}</td>
+                   
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
  
 

@@ -1,35 +1,41 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Workbook } from 'exceljs';
 import { Observable, retry } from 'rxjs';
 import * as fs from 'file-saver';
 import { environment } from 'src/environments/environment';
-
 @Injectable({
   providedIn: 'root'
 })
 export class ContainerBlockReportService {
 
-  
+
   igmMisIp : string;
   igmMisPort : string;
+
+  // constructor(
+  //   private httpClient: HttpClient
+  // ) {
+  //   this.laborModuleIp = environment.laborModuleIp;
+  //   this.laborModulePort = environment.laborModulePort;
+  //  }
+
 
   fileName = 'Export Container Block Report.xlsx';
   title: any = 'CHITTAGONG PORT AUTHORITY,CHITTAGONG';
   title1: any = 'Export Container Block Report';
 
 
-  header: any = ["Sl No", "Container No.", "Type", "MLO", "Status", "Weight", "POD", "Stowage", "ComingFrom", "Commodity", "Remarks.", "User Id"]
+  header: any = ["Sl No", "Container No.", "Type", "MLO", "Status", "Weight", "POD", "Stowage","ComingFrom", "Commodity", "Remarks.", "User Id"]
   constructor(
-    private httpClient: HttpClient
+    private httpClient:HttpClient
   ) { 
-
-
     this.igmMisIp = environment.igmMisIp;
     this.igmMisPort = environment.igmMisPort;
+
   }
 
-  getResultWithExcel(containerBlockReport: any, rotation_no: any, vname: any, voyNo: any) {
+  getResultWithExcel(containerBlockReport: any, rotation_no: any,vname: any,voyNo:any) {
     // Create workbook and worksheet
     let workbook = new Workbook();
     let worksheet = workbook.addWorksheet('Export Container Block Report');
@@ -41,7 +47,7 @@ export class ContainerBlockReportService {
     let titleRowOne = worksheet.addRow(["", "", this.title1]);
     titleRowOne.alignment = { vertical: 'top', horizontal: 'left' };
     titleRowOne.font = { size: 16, bold: true };
-    let RotationTitle = worksheet.addRow(["", "", "Rotation:", rotation_no, "Vessel Name:", vname, "VoyNo:", voyNo]);
+    let RotationTitle = worksheet.addRow(["", "", "Rotation:", rotation_no, "Vessel Name:", vname,"VoyNo:",voyNo]);
     RotationTitle.alignment = { vertical: 'top', horizontal: 'left' };
     RotationTitle.font = { size: 16, bold: true };
 
@@ -68,7 +74,7 @@ export class ContainerBlockReportService {
     let i = 0;
     for (let result of containerBlockReport) {
       i++;
-      let row = worksheet.addRow([i, result["contNo"], result["iso"], result["mlo"], result["contStatus"], result["weight"], result["pod"], result["stowage_pos"], result["coming_from"], result[" commodity"], result[" remarks"], result["user_id"]]);
+      let row = worksheet.addRow([i, result["contNo"], result["iso"], result["mlo"], result["contStatus"], result["weight"], result["pod"], result["stowage_pos"], result["coming_from"],result[" commodity"],result[" remarks"],result["user_id"]]);
       let color = 'FF99FF99';
       row.eachCell((cell, number) => {
         cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
@@ -110,18 +116,27 @@ export class ContainerBlockReportService {
   }
 
 
-  getVoyNo(rotation: String): Observable<any> {
-    return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/ExportReport/ExportContainerBlockReportVoyNo/` + rotation)
-  }
 
-  getvvdgkey(rotation: String): Observable<any> {
-    return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/ExportReport/ExportContainerBlockReport/` + rotation);
-  }
+  // getLocationList(): Observable<any> {
+  //   return this.httpClient.get(this.laborModuleIp + this.laborModulePort + `/Locations/list`);
+  // }
 
-  getContainerVesselInfo(rotation: String): Observable<any> {
-    return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/ExportReport/ExportContainerBlockReportVesselInfo/` + rotation);
-  }
-  getContainerList(rotation: String): Observable<any> {
-    return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/ExportReport/ExportContatinerBlockReportList/` + rotation);
-  }
+
+getVoyNo(rotation:String):Observable<any>
+{
+return this.httpClient.get(`http://192.168.16.188:8093/ExportReport/ExportContainerBlockReportVoyNo/`+rotation)
+}
+
+getvvdgkey(rotation:String):Observable<any>{
+  return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/ExportReport/ExportContainerBlockReport/`+rotation);
+}
+
+getContainerVesselInfo(rotation:String):Observable<any>{
+  return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/ExportReport/ExportContainerBlockReportVesselInfo/`+rotation);
+}
+getContainerList(rotation:String):Observable<any>{
+  return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/ExportReport/ExportContatinerBlockReportList/`+rotation);
+}
+
+
 }

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ExportExcelUploadSampleService } from '../service/ExportReports/export-excel-upload-sample/export-excel-upload-sample.service';
-
+import { MloWiseExcelUploadedService } from '../service/ExportReports/mlo-wise-excel-uploaded/mlo-wise-excel-uploaded.service';
 
 @Component({
   selector: 'app-export-mlo-wise-excel-uploaded-report-form',
@@ -20,7 +19,7 @@ export class ExportMloWiseExcelUploadedReportFormComponent implements OnInit {
   constructor(
     private toastr:ToastrService,
     private router: Router,
-    private mlo_wise_excel_uploaded:ExportExcelUploadSampleService
+    private mlo_wise_excel_uploaded:MloWiseExcelUploadedService
   ) { }
 
   ngOnInit(): void {
@@ -64,25 +63,21 @@ export class ExportMloWiseExcelUploadedReportFormComponent implements OnInit {
         this.containerVoyNo = data;
         console.log(data);
         for (let mlo_excel_uploaded of data) {
-          this.voyNo = mlo_excel_uploaded.voy_No;
-  
+          this.voyNo = mlo_excel_uploaded.voy_No;  
         }
+
         console.log(this.voyNo);
         this.mlo_wise_excel_uploaded.getContainerVesselInfo(tmp_rot_no).subscribe(data=>{
-        this.mlo_wise_excel=data;
-  
+        this.mlo_wise_excel=data;  
         for (let vnamedata of data) {
-      this.vname= vnamedata.vsl_name
-       console.log(this.vname);
-    
+        this.vname= vnamedata.vsl_name
+        console.log(this.vname);    
         }
 
         let response = this.mlo_wise_excel_uploaded.getContainerList(tmp_rot_no);
         response.subscribe(data => {
-          this.mlo_wise_excel = data;
-        
-          this.mlo_wise_excel_uploaded.getResultWithExcel(data, this.rotation_no,this.vname,this.voyNo);
-  
+          this.mlo_wise_excel = data;        
+          this.mlo_wise_excel_uploaded.getResultWithExcel(data, this.rotation_no,this.vname,this.voyNo);  
         });
 
       });

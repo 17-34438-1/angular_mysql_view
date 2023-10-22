@@ -2,14 +2,10 @@ import { Injectable } from '@angular/core';
 import { Workbook } from 'exceljs';
 import * as fs  from 'file-saver';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class DgContainerDeliveryReportService {
-
-  igmMisIp : string;
-  igmMisPort : string;
 
   fileName= 'DG Container Delivery Report.xlsx';
   ctgPortTitle="CHITTAGONG PORT AUTHORITY,CHITTAGONG"
@@ -21,11 +17,7 @@ export class DgContainerDeliveryReportService {
   constructor(
     private httpClient: HttpClient
 
-  ) { 
-
-    this.igmMisIp = environment.igmMisIp;
-    this.igmMisPort = environment.igmMisPort;
-  }
+  ) { }
 
 
   getEquipmentHandlingPerformaceHistoryRtgList(shift:any,rotation:any,fromDate:any,toDate:any){
@@ -38,20 +30,31 @@ export class DgContainerDeliveryReportService {
     toDate="00:00:00"
 
 
-    return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/DgInfo/DgContainerDeliveryReport/`+shift+"/"+tmp_rot_no+"/"+fromDate+"/"+toDate); 
+    console.log("rotation:"+rotation)
+    console.log("formDate..............:"+fromDate)
+    console.log("todate..........:"+toDate)
+  
+
+    return this.httpClient.get(`http://192.168.16.188:8093/DgInfo/DgContainerDeliveryReport/` +shift+"/"+tmp_rot_no+"/"+fromDate+"/"+toDate); 
   
   
   }
 
   getEquipmentHandling(shift:any,rotation:any,fromDate:any,toDate:any){
     rotation="0";
+console.log("rotation........"+rotation)
+ console.log("shift.................:"+shift)
+    console.log("formDate..............:"+fromDate)
+    console.log("todate..........:"+toDate)
   
-    return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/DgInfo/DgContainerDeliveryReport/`+shift+"/"+rotation+"/"+fromDate+"/"+toDate); 
+    return this.httpClient.get(`http://192.168.16.188:8093/DgInfo/DgContainerDeliveryReport/`+shift+"/"+rotation+"/"+fromDate+"/"+toDate); 
+  console.log(this.httpClient.get(`http://192.168.16.188:8093/DgInfo/DgContainerDeliveryReport/`+shift+"/"+rotation+"/"+fromDate+"/"+toDate) )
   }
 
   getResultWithExcel(resultList:any,shift:any,impotation:any,fromDate:any,toDate:any){
    
 
+    console.log("Rotation..................:"+impotation)
     let workbook = new Workbook();
     let worksheet = workbook.addWorksheet("DG Container Delivery Report");
 

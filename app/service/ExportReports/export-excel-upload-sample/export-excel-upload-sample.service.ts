@@ -4,15 +4,11 @@ import { Observable } from 'rxjs';
 import { Workbook } from 'exceljs';
 
 import * as fs from 'file-saver';
-
-import { environment } from 'src/environments/environment';
-
 @Injectable({
   providedIn: 'root'
 })
 export class ExportExcelUploadSampleService {
-  igmMisIp : string;
-  igmMisPort : string;
+
   fileName = 'Excel Uploaded Sample.xlsx';
   title: any = 'CHITTAGONG PORT AUTHORITY,CHITTAGONG';
   title1: any = 'Excel Uploaded Sample';
@@ -21,12 +17,7 @@ export class ExportExcelUploadSampleService {
   header: any =  ["Sl No", "Id","Iso", "Size",  "Height", "Mlo", "Freight_kind","Weight","Pod","Stowage_pos", "Last_update","Seal_no", "Coming_from", "Truck_no", "Craine_id","User Id"]
   constructor(
     private httpClient:HttpClient
-  ) { 
-
-    this.igmMisIp = environment.igmMisIp;
-    this.igmMisPort = environment.igmMisPort;
-
-  }
+  ) { }
 
 
 
@@ -60,9 +51,9 @@ export class ExportExcelUploadSampleService {
   
       cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } }
     });
-    // worksheet.addRows(data);
 
-    // Add Data and Conditional Formatting
+
+ 
      let i = 0;
     for (let result of mlo_wise_excel_uploaded) {
       i++;
@@ -110,16 +101,18 @@ export class ExportExcelUploadSampleService {
   
   getVoyNo(rotation:String):Observable<any>
   {
-  return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/ExportReport/ExportMloWiseExcelUploadedReportVoyNo/`+rotation)
+  return this.httpClient.get(`http://192.168.16.243:8093/ExportReport/ExportMloWiseExcelUploadedReportVoyNo/`+rotation)
   }
+
+
   getvvdgkey(rotation:String):Observable<any>{
-    return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/ExportReport/ExportMLOExcelUploadedReport/`+rotation);
+    return this.httpClient.get(`http://192.168.16.243:8093/ExportReport/ExportMLOExcelUploadedReport/`+rotation);
   }
   
   getContainerVesselInfo(rotation:String):Observable<any>{
-    return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/ExportReport/ExportMLOExcelUploadedReportVesselInformation/`+rotation);
+    return this.httpClient.get(`http://192.168.16.243:8093/ExportReport/ExportMLOExcelUploadedReportVesselInformation/`+rotation);
   }
   getContainerList(rotation:String):Observable<any>{
-    return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/ExportReport/ExportMloWiseExcelUploadedReportSummary/`+rotation);
+    return this.httpClient.get(`http://192.168.16.243:8093/ExportReport/ExportMloWiseExcelUploadedReportSummary/`+rotation);
   }
 }

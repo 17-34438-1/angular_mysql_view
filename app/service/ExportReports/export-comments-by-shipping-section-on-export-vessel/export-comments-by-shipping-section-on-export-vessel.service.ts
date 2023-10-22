@@ -4,29 +4,23 @@ import { Observable } from 'rxjs';
 import { Workbook } from 'exceljs';
 
 import * as fs from 'file-saver';
-import { environment } from 'src/environments/environment';
-
 @Injectable({
   providedIn: 'root'
 })
 export class ExportCommentsByShippingSectionOnExportVesselService {
 
-  igmMisIp : string;
-  igmMisPort : string;
-
-
   fileName = 'Vessel List With Comments by Shipping Sectiony.excel';
   title: any = 'CHITTAGONG PORT AUTHORITY,CHITTAGONG';
+
+
+
   header: any =  ["Sl No", "Vessel Name","Import Rotation", "Export Rotation",  "Agent", "Berth Operator", "Status","ETA","ETD","ATA", "ATD", "STATUS", "Status Time","Comments","Comments By","Comments Time"]
   
   constructor(
     private httpClient:HttpClient
   )
-   { 
-    this.igmMisIp = environment.igmMisIp;
-    this.igmMisPort = environment.igmMisPort;
-
-   }  
+   { }
+   
 
 
    getResultWithExcel(export_date_and_rotation: any, fromDate: any,toDate:any) {
@@ -90,7 +84,7 @@ export class ExportCommentsByShippingSectionOnExportVesselService {
     worksheet.getColumn(13).width = 25;
     worksheet.getColumn(14).width = 25;
     worksheet.getColumn(15).width = 25;
-    worksheet.getColumn(16).width = 16;
+    worksheet.getColumn(167).width = 16;
     
 
     worksheet.getRow(1).outlineLevel = 200;
@@ -102,11 +96,20 @@ export class ExportCommentsByShippingSectionOnExportVesselService {
       let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
       fs.saveAs(blob, 'Vessel List With Comments by Shipping Sectiony.xlsx');
     });
+
+
+
+
   }
+
      
 getExportCommentsByShippingSection(fromDate:any,toDate:any):Observable<any>
 {
-  return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/ExportReport/ExportReportExportCommentsByShippingSectionOnExportVessel/`+fromDate + "/"+toDate);
+  console.log("hellow world bangladesh");
+  console.log("FromDate:"+fromDate);
+  console.log("rotaion:"+toDate)
+  
+  return this.httpClient.get(`http://192.168.16.188:8093/ExportReport/ExportReportExportCommentsByShippingSectionOnExportVessel/`+fromDate + "/"+toDate);
 }
 
 }

@@ -151,11 +151,11 @@ export class DgManifestReportService {
  }
 
 DischargInfo(tmp_rot_no: string):Observable<any> {
-  return this.httpClient.get(`http://192.168.16.243:8093/DgInfoController/DgInfo/` + tmp_rot_no);
+  return this.httpClient.get(`http://192.168.16.188:8081/DgInfoController/DgInfo/` + tmp_rot_no);
 }
 
 DischargByRotation(tmp_rot_no: string):Observable<any> {
-  return this.httpClient.get(`http://192.168.16.243:8093/DgInfo/DgManifestReport/` + tmp_rot_no);
+  return this.httpClient.get(`http://192.168.16.188:8093/DgInfo/DgManifestReport/` + tmp_rot_no);
 }
 
 

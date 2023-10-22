@@ -107,7 +107,7 @@ export class DgContainerByRotationService {
  }
 
 ContainerByRotation(tmp_rot_no: string):Observable<any> {
-  return this.httpClient.get(`http://192.168.16.243:8093/DgInfo/DgContainerByRotation/` + tmp_rot_no);
+  return this.httpClient.get(`http://192.168.16.188:8093/DgInfo/DgContainerByRotation/` + tmp_rot_no);
 }
 
 

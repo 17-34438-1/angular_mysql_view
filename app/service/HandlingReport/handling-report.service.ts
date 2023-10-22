@@ -6,39 +6,20 @@ import { Observable } from 'rxjs';
 import { Workbook } from 'exceljs';
 
 import * as fs from 'file-saver';
-import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class HandlingReportService {
-  igmMisIp : string;
-  igmMisPort : string;
+
 
   constructor( 
       private httpClient: HttpClient
-    ) {
-
-      this.igmMisIp = environment.igmMisIp;
-      this.igmMisPort = environment.igmMisPort;
-
-     }
+    ) { }
 
 
     fileName = 'Handling Report.xlsx';
     title: any = '24 HRS. CONTAINER HANDLING REPORT OF';
 
-
-  //   <tr>
-  //   <td><font size="4"><b> Date : {{workDateContainer}}</b></font></td>
-  // </tr>
-  // <tr><td>VESSEL NAME - </td><td>{{name}}</td></tr>
-  // <tr><td>VOYAGE - </td><td> {{" "}}</td></tr>
-  // <tr><td>IMP.ROT. - </td><td>{{ib_vyg}}</td></tr>
-  // <tr><td>EXP.ROT. - </td><td>{{ob_vyg}}</td></tr>
-  // <tr><td>BERTH NO - </td><td>{{berth}}</td></tr>
-  // <tr><td>SHIPPING AGENT - </td><td>{{shipping_agent}}</td></tr>
-  // <tr><td>ARRIVED DATE - </td><td>{{arrived_date}}</td></tr>
-  // <tr><td>EXPECTED TIME OF DEPARTURE - </td><td>{{departure_date}}</td></tr>
 
 
     title1: any = ' Date :';
@@ -191,9 +172,7 @@ export class HandlingReportService {
       
   
       for (let result of ExportHandlingRepor) {
-    
         let row = worksheet.addRow([result["disch_load20"], result["disch_load40"],result["disch_mty20"], result["disch_mty40"],result["load_teus"], result["mty_teus"], result["tot_disch_load20"],result["tot_disch_load40"],result["tot_disch_mty20"],result["tot_disch_mty40"],result["tot_disch_load_teus"],result['tot_disch_mty_teus'],result['bal_load20'],result['bal_load40'],result['bal_mty20'],result['bal_mty40'],result['bal_load_teus'],result['bal_mty_teus']]);
-
         let color = 'FF99FF99';
         row.eachCell((cell, number) => {
           cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } };
@@ -225,16 +204,14 @@ export class HandlingReportService {
 
 
   getExportHandlingReport(rotation: string,word_date:string): Observable<any> {
-
- 
-    return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/HandlingReport/ContainerHandlingExportReport/`+rotation +"/"+word_date);
+    return this.httpClient.get(`http://192.168.16.188:8081/ExportReport/ContainerHandlingExportReport/`+rotation +"/"+word_date);
   }
 
   getImportHandlingReport(rotation: string,word_date:string):Observable<any> {
-    return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/HandlingReport/ContainerHandlingImportReport/`+rotation +"/"+word_date);
+    return this.httpClient.get(`http://192.168.16.188:8081/ExportReport/ContainerHandlingImportReport/`+rotation +"/"+word_date);
   }
 
   getContainerHandling(rotation: any): Observable<any> {
-    return this.httpClient.get(this.igmMisIp + this.igmMisPort +`/HandlingReport/HandlingReport/`+ rotation);
+    return this.httpClient.get(`http://192.168.16.188:8081/ExportReport/HandlingReport/`+ rotation);
   }
 }
